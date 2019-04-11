@@ -25,8 +25,10 @@ class Login extends React.Component {
   }
   async login() {
     login_web({username: this.state.userName,password: this.state.password}).then((data) => {
-      console.log(data)
-      
+      if (data.data.code===200) {
+        this.props.history.replace('/home');
+      }
+      // 用户名   10293210666
     })
   }
   render() {
