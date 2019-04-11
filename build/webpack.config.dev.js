@@ -29,7 +29,16 @@ module.exports = {
         // 服务端口为1208
         port: 1208,
         // 自动打开浏览器
-        open: false
+        open: false,
+        // proxyTable: {
+        //   '/api': {
+        //     target: 'http://10.10.10.116:9002',
+        //     // changeOrigin: true,
+        //     pathRewrite: {
+        //       '^/api': '/api'
+        //     }
+        //   },
+        // }
     },
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],

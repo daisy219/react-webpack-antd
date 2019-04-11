@@ -22,14 +22,14 @@ module.exports = {
     },
     // 配置开发服务器, 并配置自动刷新
     devServer: {
-        // 根目录下dist为基本目录
-        contentBase: path.join(__dirname, 'dist'),
-        // 自动压缩代码
-        compress: true,
-        // 服务端口为1208
-        port: 1208,
-        // 自动打开浏览器
-        open: false
+      // 根目录下dist为基本目录
+      contentBase: path.join(__dirname, 'dist'),
+      // 自动压缩代码
+      compress: true,
+      // 服务端口为1208
+      port: 1208,
+      // 自动打开浏览器
+      open: false
     },
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],

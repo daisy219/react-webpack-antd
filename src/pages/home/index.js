@@ -1,6 +1,8 @@
 import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import Button from 'antd/lib/button';
+import { Link } from 'react-router-dom';
+
 
 class Home extends Component{
   async test() {
@@ -15,6 +17,12 @@ class Home extends Component{
               <Button>Default</Button>
               <Button type="dashed">Dashed</Button>
               <Button type="danger">Danger</Button>
+            <ul>
+                <li><Link to='/' >Home</Link></li>
+                <li><Link to='/coach/6'>coach</Link></li>
+                <li><Link to='/worry'>worry</Link></li>
+                <li><Link to='/work'>work</Link></li>
+            </ul>
           </div>
       )
   }
