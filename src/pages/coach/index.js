@@ -1,4 +1,5 @@
 import React from 'react';
+// import MainMenu from '../../components/menu'
 
 // class Coach extends React.Component {
 //   render({ match }) {
@@ -12,7 +13,10 @@ import React from 'react';
 // }
 function Coach({match}) {
   return(
-    <div>{match.params.number}</div>
+    <div>
+      {/* <MainMenu/> */}
+      {match.params.number}
+    </div>
   )
 }
 export default Coach

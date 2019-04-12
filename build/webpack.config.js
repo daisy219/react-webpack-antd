@@ -39,6 +39,10 @@ module.exports = {
         // 根据文件后缀匹配规则
         rules: [
           {
+            test: /\.(jpg|png)$/,
+            use: 'url-loader'
+          },
+          {
             test: /\.(jsx|js)$/,
             exclude: /node_modules/,
             use: {

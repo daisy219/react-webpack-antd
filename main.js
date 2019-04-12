@@ -1,7 +1,12 @@
 import React,{ Component } from 'react';
-import {  BrowserRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import Login from './src/pages/login/index'
+import Home from './src/pages/home/index'
+
 import ReactDOM from 'react-dom';
 import MainRouter from './src/router/index';
+import MainMenu from './src/components/menu';
 
 import './src/assets/index.less';
 /**
@@ -46,7 +51,14 @@ import './src/assets/index.less';
 class App extends Component{
     render(){
         return (
-            <MainRouter/>
+            <div>
+                <Switch>
+                    <Route exact path='/' component={Login}/>
+                    <Route exact path='/mainmenu' component={MainMenu}>
+                        <MainRouter/>
+                    </Route>
+                </Switch>
+            </div>
         )
     }
 }

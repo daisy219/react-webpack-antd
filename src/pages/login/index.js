@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Button } from 'antd';
+import { Input, Button, message } from 'antd';
 import { login_web } from '../../services/login'
 
 import './index.less'
@@ -26,7 +26,8 @@ class Login extends React.Component {
   async login() {
     login_web({username: this.state.userName,password: this.state.password}).then((data) => {
       if (data.data.code===200) {
-        this.props.history.replace('/home');
+        message.info('登录成功');
+        this.props.history.replace('/mainmenu');
       }
       // 用户名   10293210666
     })
@@ -34,7 +35,7 @@ class Login extends React.Component {
   render() {
     return (
       <div className="login_model">
-        {/* <img src={imgURL}></img> */}
+        {/* <img src={require('../../assets/image/bg2.jpg')}></img> */}
         <div className="login_box">
           <Input placeholder="请输入用户名" value={this.state.userName} onChange={this.nameChange}/>
           <Input placeholder="请输入密码" value={this.state.password} onChange={this.passChange}/>
