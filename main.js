@@ -7,6 +7,7 @@ import Home from './src/pages/home/index'
 import ReactDOM from 'react-dom';
 import MainRouter from './src/router/index';
 import MainMenu from './src/components/menu';
+import Layout from './src/layout/index'
 
 import './src/assets/index.less';
 /**
@@ -52,12 +53,10 @@ class App extends Component{
     render(){
         return (
             <div>
-                <Switch>
-                    <Route exact path='/' component={Login}/>
-                    <Route exact path='/mainmenu' component={MainMenu}>
-                        <MainRouter/>
-                    </Route>
-                </Switch>
+                <Route path='/' component={Login} />
+                <Route path='/teacher' component={Layout} />
+                {/* <MainRouter/> */}
+                {/* <Layout /> */}
             </div>
         )
     }
