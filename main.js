@@ -7,6 +7,7 @@ import Home from './src/pages/home/index'
 import ReactDOM from 'react-dom';
 import MainRouter from './src/router/index';
 import MainMenu from './src/components/menu';
+import Layout from './src/layout/index'
 
 import './src/assets/index.less';
 /**
@@ -52,6 +53,7 @@ class App extends Component{
     render(){
         return (
             <div>
+<<<<<<< HEAD
                 <MainMenu/>
                 <MainRouter/>
                 {/* <Switch>
@@ -60,6 +62,12 @@ class App extends Component{
                         <MainRouter/>
                     </Route>
                 </Switch> */}
+=======
+                <Route path='/' component={Login} />
+                <Route path='/teacher' component={Layout} />
+                {/* <MainRouter/> */}
+                {/* <Layout /> */}
+>>>>>>> 0478d7a30210ce5e8062fb1643e0b8b8447aa228
             </div>
         )
     }

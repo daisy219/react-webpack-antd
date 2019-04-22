@@ -11,7 +11,8 @@ class Login extends React.Component {
 
     this.state = {
       userName: '',
-      password: ''
+      password: '',
+      isLogin: false
     };
     this.nameChange = this.nameChange.bind(this);
     this.passChange = this.passChange.bind(this);
@@ -24,6 +25,7 @@ class Login extends React.Component {
     this.setState({password: event.target.value})
   }
   async login() {
+<<<<<<< HEAD
     // login_web({username: this.state.userName,password: this.state.password}).then((data) => {
     //   if (data.data.code===200) {
     //     message.info('登录成功');
@@ -31,20 +33,35 @@ class Login extends React.Component {
     //   }
     //   // 用户名   10293210666
     // })
+=======
+    console.log('触发')
+    login_web({username: this.state.userName,password: this.state.password}).then((data) => {
+      if (data.data.code===200) {
+        message.info('登录成功');
+        this.setState({isLogin: true})
+        this.props.history.replace('/teacher');
+      }
+      // 用户名   
+    })
+>>>>>>> 0478d7a30210ce5e8062fb1643e0b8b8447aa228
   }
   render() {
-    return (
-      <div className="login_model">
-        {/* <img src={require('../../assets/image/bg2.jpg')}></img> */}
-        <div className="login_box">
-          <Input placeholder="请输入用户名" value={this.state.userName} onChange={this.nameChange}/>
-          <Input placeholder="请输入密码" value={this.state.password} onChange={this.passChange}/>
-          <div className="loginBtn">
-            <Button type="primary" onClick={this.login.bind(this)}>登录</Button>
+    if (!this.state.isLogin) {
+      return (
+        <div className="login_model">
+          {/* <img src={require('../../assets/image/bg2.jpg')}></img> */}
+          <div className="login_box">
+            <Input placeholder="请输入用户名" value={this.state.userName} onChange={this.nameChange}/>
+            <Input placeholder="请输入密码" value={this.state.password} onChange={this.passChange}/>
+            <div className="loginBtn">
+              <Button type="primary" onClick={this.login.bind(this)} onKeyDown={(e) => {console.log(e.keyCode)}}>登录</Button>
+            </div>
           </div>
         </div>
-      </div>
-    )
+      )
+    } else {
+      return null
+    }
   }
 }
 

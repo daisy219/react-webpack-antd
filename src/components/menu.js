@@ -20,7 +20,9 @@ class MainMenu extends React.Component{
     }
     handleClick(e) {
         console.log(e)
-        this.setState({current: e.key})
+        
+        console.log(this.props.currentPage)
+        this.setState({ current: e.key})
     }
     render(){
         // this.test()
@@ -38,7 +40,7 @@ class MainMenu extends React.Component{
                         <Link to='/coach/6'>作业辅导</Link>
                     </Menu.Item>
                     <Menu.Item key="worry">
-                        <Link to='/worry'>错题集</Link>
+                        <Link to='/wrong'>错题集</Link>
                     </Menu.Item>
                     <Menu.Item key="work">
                         <Link to='/work'>网络作业</Link>

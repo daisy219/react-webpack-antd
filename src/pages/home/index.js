@@ -1,8 +1,12 @@
 import React from 'react';
 // import { Icon, Menu, Divider} from 'antd';
+<<<<<<< HEAD
 // import MainMenu from '../../components/menu'
 import { login_web } from '../../services/login'
 import { Input, Button, message } from 'antd';
+=======
+import MainMenu from '../../components/menu'
+>>>>>>> 0478d7a30210ce5e8062fb1643e0b8b8447aa228
 
 class Home extends React.Component{
     constructor(props) {
@@ -42,11 +46,17 @@ class Home extends React.Component{
         // this.test()
         return (
             <div>
+<<<<<<< HEAD
                 {/* <MainMenu/> */}
                 首页    
                 {/* <img src={require('../../assets/image/bg.jpg')}></img> */}
                 <Button type="primary" onClick={this.readcookie.bind(this)}>cookie</Button>
 
+=======
+                {/* <MainMenu currentPage='home'/> */}
+                首页
+                <img src={require('../../assets/image/bg.jpg')}></img>
+>>>>>>> 0478d7a30210ce5e8062fb1643e0b8b8447aa228
             </div>
         )
   }
