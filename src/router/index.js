@@ -9,17 +9,10 @@ import Work from '../pages/work/index'
 const MainRouter = () => (
   <main>
     <Switch>
-<<<<<<< HEAD
-      <Route exact path='/' component={Home}/>
-      <Route path='/coach/:number' component={Coach}/>
-      <Route path='/worry' component={Worry}/>
-      <Route path='/work' component={Work}/>
-=======
       <Route exact path='/teacher/home' component={Home}/>
       <Route path='/teacher/coach/:number' component={Coach}/>
       <Route path='/teacher/wrong' component={Worry}/>
       <Route path='/teacher/work' component={Work}/>
->>>>>>> 0478d7a30210ce5e8062fb1643e0b8b8447aa228
     </Switch>
   </main>
 )

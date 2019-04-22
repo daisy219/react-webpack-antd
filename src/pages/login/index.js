@@ -25,17 +25,8 @@ class Login extends React.Component {
     this.setState({password: event.target.value})
   }
   async login() {
-<<<<<<< HEAD
-    // login_web({username: this.state.userName,password: this.state.password}).then((data) => {
-    //   if (data.data.code===200) {
-    //     message.info('登录成功');
-    //     this.props.history.replace('/mainmenu');
-    //   }
-    //   // 用户名   10293210666
-    // })
-=======
     console.log('触发')
-    login_web({username: this.state.userName,password: this.state.password}).then((data) => {
+    login_web({username: this.state.userName, password: this.state.password}).then((data) => {
       if (data.data.code===200) {
         message.info('登录成功');
         this.setState({isLogin: true})
@@ -43,7 +34,6 @@ class Login extends React.Component {
       }
       // 用户名   
     })
->>>>>>> 0478d7a30210ce5e8062fb1643e0b8b8447aa228
   }
   render() {
     if (!this.state.isLogin) {

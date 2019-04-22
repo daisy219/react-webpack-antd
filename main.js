@@ -1,5 +1,5 @@
 import React,{ Component } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { Switch, Route } from 'react-router-dom';
 import Login from './src/pages/login/index'
 import Home from './src/pages/home/index'
@@ -53,27 +53,16 @@ class App extends Component{
     render(){
         return (
             <div>
-<<<<<<< HEAD
-                <MainMenu/>
-                <MainRouter/>
-                {/* <Switch>
-                    <Route exact path='/' component={Login}/>
-                    <Route exact path='/mainmenu' component={MainMenu}>
-                        <MainRouter/>
-                    </Route>
-                </Switch> */}
-=======
                 <Route path='/' component={Login} />
                 <Route path='/teacher' component={Layout} />
                 {/* <MainRouter/> */}
                 {/* <Layout /> */}
->>>>>>> 0478d7a30210ce5e8062fb1643e0b8b8447aa228
             </div>
         )
     }
 }
 ReactDOM.render((
-    <BrowserRouter>
+    <HashRouter>
         <App />
-    </BrowserRouter>
+    </HashRouter>
 ), document.getElementById('root'))
