@@ -32,7 +32,7 @@ class MainMenu extends React.Component{
                     mode="horizontal"
                 >
                     <Menu.Item key="home">
-                        <Link to='/mainmenu/home' >主页</Link>
+                        <Link to='/' >主页</Link>
                     </Menu.Item>
                     <Menu.Item key="coach">
                         <Link to='/coach/6'>作业辅导</Link>

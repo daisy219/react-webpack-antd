@@ -52,12 +52,14 @@ class App extends Component{
     render(){
         return (
             <div>
-                <Switch>
+                <MainMenu/>
+                <MainRouter/>
+                {/* <Switch>
                     <Route exact path='/' component={Login}/>
                     <Route exact path='/mainmenu' component={MainMenu}>
                         <MainRouter/>
                     </Route>
-                </Switch>
+                </Switch> */}
             </div>
         )
     }
