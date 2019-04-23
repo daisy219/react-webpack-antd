@@ -1,5 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
+import { Token } from '../utils/utils'
 
 let http = {
   post: '',
@@ -7,7 +8,9 @@ let http = {
 }
 
 http.post = function(api, data) {
-  let params = qs.stringify(data)
+  let _data = data;
+  Object.assign(_data, {token: Token()})
+  let params = qs.stringify(_data)
   return new Promise((resolve, rerject) => {
     axios.post(api, params).then((res) => {
       resolve(res)
@@ -16,8 +19,11 @@ http.post = function(api, data) {
 }
 
 http.get = function(api, data) {
+  let _data = data;
+  Object.assign(_data.params, {token: Token()})
+  // console.log(_data)
   return new Promise((resolve, reject) => {
-    axios.get(api, data).then((res) => {
+    axios.get(api, _data).then((res) => {
       resolve(res)
     })
   })

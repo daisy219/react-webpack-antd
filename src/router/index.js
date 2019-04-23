@@ -1,10 +1,14 @@
+/**
+ * 入口路由
+ */
+
 import React from 'react';
 import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
 import { Token } from '../utils/utils'
 import Login from '../pages/login/index';
 import Layout from '../layout/index';
 
-class StartRouter extends React.Component{
+class StartRouter extends React.Component {
   render() {
     return(
       <BrowserRouter>
@@ -12,10 +16,10 @@ class StartRouter extends React.Component{
           <Route exact path='/' 
               render={
                   ()=> {
-                      if (Token()) {
-                          return (<Redirect to='/teacher/home' />)
+                      if (!Token() || Token()==='null') {
+                        return (<Redirect to='/login' />)
                       } else {
-                          return (<Redirect to='/login' />)
+                        return (<Redirect to='/teacher/home' />)
                       }
                   }
               } />

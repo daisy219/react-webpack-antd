@@ -1,33 +1,60 @@
 import React from 'react';
-// import { Icon, Menu, Divider} from 'antd';
-import MainMenu from '../../components/menu'
-import { login_web } from '../../services/login'
-import { setCookie } from '../../utils/utils'
+import { Cascader } from 'antd';
+import { get_textbooks } from '../../services/home'
+import './index.less'
 
-class Home extends React.Component{
+class Home extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = {
+           options: [{
+                value: 'zhejiang',
+                label: 'Zhejiang',
+                children: [{
+                  value: 'hangzhou',
+                  label: 'Hangzhou',
+                  children: [{
+                    value: 'xihu',
+                    label: 'West Lake',
+                  }],
+                }],
+              }, {
+                value: 'jiangsu',
+                label: 'Jiangsu',
+                children: [{
+                  value: 'nanjing',
+                  label: 'Nanjing',
+                  children: [{
+                    value: 'zhonghuamen',
+                    label: 'Zhong Hua Men',
+                  }],
+                }],
+              }]
+        }
     }
     componentWillMount() {
-        // this.login()
+        this.get_textbooks()
     }
-    async login () {
-        login_web({username: 10293210666,password: 123456}).then((data) => {
+    async get_textbooks () {
+        get_textbooks({source: 1, termid: window.localStorage.getItem("termid"), roletype: 1}).then((data) => {
             if (data.data.code===200) {
                 console.log(data.data)
-                setCookie('platform_token', data.data.token)
             }
             // 用户名   10293210666
           })
     }
+    onChange(value) {
+        console.log(value);
+    }
 
-    render(){
+    render(){   
         // this.test()
         return (
-            <div>
+            <div className="home_model">
                 {/* <MainMenu currentPage='home'/> */}
-                首页
-                <img src={require('../../assets/image/bg.jpg')}></img>
+                <span className="label">请选择课本</span>
+                <Cascader options={this.state.options} onChange={this.onChange.bind(this)} placeholder="请选择课本" />
+                {/* <img src={require('../../assets/image/bg.jpg')}></img> */}
             </div>
         )
   }

@@ -17,4 +17,4 @@ export function Token() {
     else{
       return null;
     }
-} 
+}
