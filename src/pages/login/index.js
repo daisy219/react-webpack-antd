@@ -1,6 +1,8 @@
 import React from 'react';
 import { Input, Button, message } from 'antd';
 import { login_web } from '../../services/login'
+import { Token } from '../../utils/utils'
+import { Redirect } from 'react-router-dom';
 
 import './index.less'
 // import imgURL from '../../assets/image/bg.jpg';
@@ -17,6 +19,13 @@ class Login extends React.Component {
     this.nameChange = this.nameChange.bind(this);
     this.passChange = this.passChange.bind(this);
   }
+  componentWillMount() {
+    if (Token()) {
+      this.setState({isLogin: true})
+    } else {
+      this.setState({isLogin: false})
+    }
+  }
   nameChange(event) {
     this.setState({userName: event.target.value})
     console.log(this.state.value)
@@ -31,8 +40,10 @@ class Login extends React.Component {
         message.info('登录成功');
         this.setState({isLogin: true})
         this.props.history.replace('/teacher');
+      } else {
+        message.info(data.data.msg);
       }
-      // 用户名   
+      // 用户名   10293210666
     })
   }
   render() {

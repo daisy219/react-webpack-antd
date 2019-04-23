@@ -1,20 +1,29 @@
 import React from 'react';
-import { Switch, Route, IndexRoute} from 'react-router-dom';
-import Home from '../pages/home/index'
-import Coach from '../pages/coach/index'
-import Worry from '../pages/wrong/index'
-import Work from '../pages/work/index'
-// import MainMenu from '../components/menu';
+import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
+import { Token } from '../utils/utils'
+import Login from '../pages/login/index';
+import Layout from '../layout/index';
 
-const MainRouter = () => (
-  <main>
-    <Switch>
-      <Route exact path='/teacher/home' component={Home}/>
-      <Route path='/teacher/coach/:number' component={Coach}/>
-      <Route path='/teacher/wrong' component={Worry}/>
-      <Route path='/teacher/work' component={Work}/>
-    </Switch>
-  </main>
-)
-
-export default MainRouter
+class StartRouter extends React.Component{
+  render() {
+    return(
+      <BrowserRouter>
+        <Switch>
+          <Route exact path='/' 
+              render={
+                  ()=> {
+                      if (Token()) {
+                          return (<Redirect to='/teacher/home' />)
+                      } else {
+                          return (<Redirect to='/login' />)
+                      }
+                  }
+              } />
+          <Route path='/login' component={Login}/>
+          <Route path='/teacher' component={Layout} />
+        </Switch>
+      </BrowserRouter>
+    )
+  }
+}
+export default StartRouter

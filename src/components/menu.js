@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon, Menu} from 'antd';
 import { Link } from 'react-router-dom';
-import MainRouter from '../router/index';
+import MainRouter from '../router/teacher';
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
 

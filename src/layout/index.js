@@ -1,6 +1,6 @@
 import React from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
-import MainRouter from '../router/index';
+import MainRouter from '../router/teacher';
 import { BrowserRouter, Link } from 'react-router-dom';
 
 const { Header, Content, Footer } = Layout;

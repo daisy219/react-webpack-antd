@@ -18,7 +18,8 @@ module.exports = {
     // 出口文件目录为根目录下dist, 输出的文件名为main
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'dist.js'
+        filename: 'dist.js',
+        publicPath: '/'
     },
     // 配置开发服务器, 并配置自动刷新
     devServer: {
@@ -29,7 +30,8 @@ module.exports = {
       // 服务端口为1208
       port: 1208,
       // 自动打开浏览器
-      open: false
+      open: false,
+      historyApiFallback: true
     },
     resolve: {
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],

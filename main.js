@@ -1,13 +1,7 @@
-import React,{ Component } from 'react';
-import { HashRouter } from 'react-router-dom';
-import { Switch, Route } from 'react-router-dom';
-import Login from './src/pages/login/index'
-import Home from './src/pages/home/index'
-
 import ReactDOM from 'react-dom';
-import MainRouter from './src/router/index';
-import MainMenu from './src/components/menu';
-import Layout from './src/layout/index'
+import React,{ Component } from 'react';
+// import { BrowserRouter } from 'react-router-dom';
+import StartRoute from './src/router/index'
 
 import './src/assets/index.less';
 /**
@@ -53,16 +47,11 @@ class App extends Component{
     render(){
         return (
             <div>
-                <Route path='/' component={Login} />
-                <Route path='/teacher' component={Layout} />
-                {/* <MainRouter/> */}
-                {/* <Layout /> */}
+                <StartRoute />
             </div>
         )
     }
 }
 ReactDOM.render((
-    <HashRouter>
         <App />
-    </HashRouter>
 ), document.getElementById('root'))
