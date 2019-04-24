@@ -20,7 +20,7 @@ http.post = function(api, data) {
 
 http.get = function(api, data) {
   let _data = data;
-  Object.assign(_data.params, {token: Token()})
+  Object.assign(_data.params, {token: Token(), roletype: 1})
   // console.log(_data)
   return new Promise((resolve, reject) => {
     axios.get(api, _data).then((res) => {

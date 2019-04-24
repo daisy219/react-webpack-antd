@@ -16,11 +16,11 @@ class StartRouter extends React.Component {
           <Route exact path='/' 
               render={
                   ()=> {
-                      if (!Token() || Token()==='null') {
-                        return (<Redirect to='/login' />)
-                      } else {
-                        return (<Redirect to='/teacher/home' />)
-                      }
+                    if (!Token() || Token()==='null') {
+                      return (<Redirect to='/login' />)
+                    } else {
+                      return (<Redirect to='/teacher/home' />)
+                    }
                   }
               } />
           <Route path='/login' component={Login}/>
