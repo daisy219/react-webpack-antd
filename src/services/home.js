@@ -1,4 +1,4 @@
-import { AUTH_API_ROOT } from '../config/index';
+import { AUTH_API_ROOT, HOMEWORK_API_ROOT } from '../config/index';
 import http from './index';
 
 /** 获取课本 */
@@ -10,5 +10,17 @@ export async function get_textbooks(params) {
 /** 获取当前选择课本信息 */
 export async function get_onebook(params) {
     const res = await http.get(AUTH_API_ROOT + '/textbook/select-one', {params: params});
+    return res.data
+}
+
+/** 获取科目信息 */
+export async function get_subject(params) {
+    const res = await http.get(AUTH_API_ROOT + '/schoolsubject/get-list', {params: params || {}});
+    return res.data
+}
+
+/** 获取首页综合报表 */
+export async function get_report(params) {
+    const res = await http.get(HOMEWORK_API_ROOT + '/api/calculate-analysis/comprehensive-report', {params: params || {}});
     return res.data
 }

@@ -24,6 +24,7 @@ http.get = function(api, data) {
   // console.log(_data)
   return new Promise((resolve, reject) => {
     axios.get(api, _data).then((res) => {
+      // console.table(data)
       resolve(res)
     })
   })

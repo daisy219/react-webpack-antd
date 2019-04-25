@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom';
+import moment from 'moment';
 import React,{ Component } from 'react';
 // import { BrowserRouter } from 'react-router-dom';
 import StartRoute from './src/router/index'
