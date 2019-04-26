@@ -1,8 +1,12 @@
 /** 主页 */
 import React from 'react';
+import locale from 'antd/lib/date-picker/locale/zh_CN';
+import { Token, use_form_download } from '../../utils/utils'
 import { Select, Row, Col, Table, Button, Input, Icon, DatePicker } from 'antd';
-import { get_subject, get_report } from '../../services/home';
+import { get_subject, get_report, export_report } from '../../services/home';
 import './index.less';
+
+const Search = Input.Search;
 const Option = Select.Option;
 const {RangePicker} = DatePicker;
 const report_columns = [
@@ -18,20 +22,28 @@ const report_columns = [
   {title: '网络作业', dataIndex: 'hwnum', key: 'hwnum'},
   {title: '题库', dataIndex: 'tknum', key: 'tknum'},
 ]
+const report_locale = {
+  emptyText: '暂无数据'
+}
 
 /** 下拉框组件 */
 function SelectFun(props) {
   const list = props.list;
+  if (!list) {
+    return null
+  }
   const list_item = list.map((item) =>
-    <Option key={item.subjectid}>{item.subject}</Option>
-  )
+    <Option key={item[props.value]}>{item[props.label]}</Option>
+  );
+  const option_all = props.need_all ? <Option value="-1" key="-1">全选</Option> : '';
   return (
-    <Select defaultValue="-1" style={{ width: 120 }} onChange={props.handleChange}>
-      <Option value="-1" key="-1">全选</Option>
+    <Select defaultValue={props.need_all ? '-1': String(props.list[0].value)} style={{ width: 120 }} onChange={props.handleChange}>
+      {option_all}
       {list_item}
     </Select>
   )
 }
+
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -46,6 +58,11 @@ class Home extends React.Component {
             pageline: 8,
           },
           report_list: [],
+          order_list: [
+            {label: '导学本', value: 1},
+            {label: '作业辅导', value: 2},
+            {label: '导学本+作业辅导', value: 3},
+          ]
         }
     }
     componentWillMount() {
@@ -54,31 +71,52 @@ class Home extends React.Component {
     }
     componentDidMount() {
     }
-
     /** 获取首页列表 */
     async get_report_list() {
-      const res = await get_report(this.state.get_report_parames)
+      const res = await get_report(this.state.get_report_parames);
       this.setState({report_list: res.data.datalist})
     }
     
     /** 获取科目信息 */
     async get_subject() {
       const res = await get_subject();
-      this.setState({subject_list: res.data})
+      this.setState({subject_list: res.data});
     }
 
     /** 选择的科目发生变化 */
-    handleChange(value) {
+    async changeSubject(value) {
       console.log(`selected ${value}`);
+      await this.setState({get_report_parames: {...this.state.get_report_parames, orderby: value}});
+      console.log(this.state.get_report_parames)
+      this.get_report_list();
     }
 
-    onChangeDateRange(date, dateString) {
-      console.log(date, dateString);
+    /** 选择的排序发生变化 */
+    async changeOrder(value) {
+      // console.log(`selected ${value}`);
+      await this.setState({get_report_parames: {...this.state.get_report_parames, ordertype: value}});
+      this.get_report_list();
+    }
+
+    /** 选择搜索时间 */
+    async onChangeDateRange(date, dateString) {
+      await this.setState({get_report_parames: 
+        {...this.state.get_report_parames, stime: dateString[0] + ' 00:00:00', etime: dateString[1] + ' 00:00:00'}});
+      this.get_report_list();
+    }
+
+    /** 关键词搜索 */
+    async searchByKeyword(value, e) {
+      await this.setState({get_report_parames: {...this.state.get_report_parames, kw: value}});
+      this.get_report_list();
     }
 
     /** 导出 */
-    export() {
-
+    async export() {
+      const api = await export_report()
+      const params = Object.assign(this.state.get_report_parames, {token: Token()})
+      console.log(params)
+      use_form_download('get', api, params)
     }
     render(){
         // this.test()
@@ -87,24 +125,28 @@ class Home extends React.Component {
           <Row className="home_model_top">
             <Col span={4}>
               <span className="label">科目</span>
-              <SelectFun list={this.state.subject_list} handleChange={this.handleChange.bind(this)}/>
+              <SelectFun list={this.state.subject_list} 
+              handleChange={this.changeSubject.bind(this)} 
+              label={'subject'} value={'subjectid'}
+              need_all={true}/>
             </Col>
             <Col span={4}>
               <span className="label">排序</span>
-              <SelectFun list={this.state.subject_list} handleChange={this.handleChange.bind(this)}/>
+              <SelectFun list={this.state.order_list} 
+              handleChange={this.changeOrder.bind(this)} 
+              label={'label'} value={'value'}
+              need_all={false}/>
             </Col>
             <Col span={7}>
               <span className="label">搜索</span>
-              <RangePicker onChange={this.onChangeDateRange.bind(this)} />
+              <RangePicker locale={locale} onChange={this.onChangeDateRange.bind(this)} />
             </Col>
             <Col span={7}>
               <span className="label fl">关键字</span>
               <div className="search fl">
-                <Input
-                  placeholder="Enter your username"
-                  suffix={
-                      <Icon type="search" style={{ color: 'rgba(0,0,0,.45)' }} />
-                    }
+                <Search
+                  placeholder="请输入关键字"
+                  onSearch={this.searchByKeyword.bind(this)}
                   />
               </div>
               </Col>
@@ -114,10 +156,12 @@ class Home extends React.Component {
           </Row>
           {/* <img src={require('../../assets/image/bg.jpg')}></img> */}
           <Table
+            locale={report_locale}
             columns={report_columns}
             dataSource={this.state.report_list}
             bordered
             size="middle"
+            rowKey={record => record.userid}
           />
         </div>
       )

@@ -24,3 +24,9 @@ export async function get_report(params) {
     const res = await http.get(HOMEWORK_API_ROOT + '/api/calculate-analysis/comprehensive-report', {params: params || {}});
     return res.data
 }
+
+/** 导出首页综合报表 */
+export async function export_report() {
+    const url = HOMEWORK_API_ROOT + '/api/calculate-analysis/export-comprehensive-report-e';
+    return url
+}

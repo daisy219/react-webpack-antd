@@ -68,8 +68,8 @@ module.exports = {
                 options: { // antd定制主题
                   modifyVars: {
                     '@primary-color': '#26bf80',//主题色
-                    '@warning-color': '#ff727f', //警告色
-                    '@success-color': '#52c41a', //成功色
+                    '@warning-color': '#fa541c', //警告色
+                    '@success-color': '#26bf80', //成功色
                     '@error-color': '#fa541c', //错误色
                   },
                   javascriptEnabled: true,
