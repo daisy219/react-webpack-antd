@@ -21,17 +21,20 @@ class Coach extends React.Component {
   render() {
     return (
       <div className="coach_model">
-        <ChooseTextbook />
         <Row>
           <Col span={6}>
-            <div className="btn_group">
-              <Button type="primary" onClick={this.newCoach.bind(this)}>新建</Button>
-              <Button type="primary" onClick={this.newCoach.bind(this)}>导出</Button>
-              <Button type="danger" onClick={this.newCoach.bind(this)}>删除</Button>
+            <ChooseTextbook />
+          </Col>
+          <Col span={18}>
+            <div className="coach_model_content">
+              <div className="btn_group">
+                <Button type="primary" onClick={this.newCoach.bind(this)}>新建</Button>
+                <Button type="primary" onClick={this.newCoach.bind(this)}>导出</Button>
+                <Button type="danger" onClick={this.newCoach.bind(this)}>删除</Button>
+              </div>
             </div>
           </Col>
-          <Col span={18}> 
-          </Col>
+
         </Row>
       </div>
     )

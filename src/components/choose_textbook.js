@@ -4,11 +4,11 @@
 // 问题记录：级联选择器默认值设置不上
 
 import React from 'react';
-import { Cascader, Row, Col, TreeSelect } from 'antd';
+import { Cascader, Row, Col, Tree  } from 'antd';
 import { get_textbooks, get_onebook, get_child_node } from '../services/home';
 import './style/choose_textbook.less';
 // import { Icon, Menu, Divider} from 'antd';
-
+const { TreeNode } = Tree;
 class ChooseTextbook extends React.Component {
   constructor(props) {
     super(props);
@@ -16,24 +16,11 @@ class ChooseTextbook extends React.Component {
       current_book: '',
       current_chapter: undefined,
       book_list: [],
-      chapter_list: [{
-        title: 'Node1',
-        value: '0-0',
-        key: '0-0',
-        children: [{
-          title: 'Child Node1',
-          value: '0-0-1',
-          key: '0-0-1',
-        }, {
-          title: 'Child Node2',
-          value: '0-0-2',
-          key: '0-0-2',
-        }],
-      }, {
-        title: 'Node2',
-        value: '0-1',
-        key: '0-1',
-      }],
+      treeData: [
+        { title: 'Expand to load', key: '0' },
+        { title: 'Expand to load', key: '1' },
+        { title: 'Tree Node', key: '2', isLeaf: true },
+      ],
     };
   // this.method = this.method.bind(this);
   }
@@ -93,47 +80,61 @@ class ChooseTextbook extends React.Component {
   async get_child_node(bookid) {
     const res = await get_child_node({bookid: bookid});
     if (res.code === 200) {
-      console.table(res.data)
+      // console.log(res.data)
+      const node_list = res.data;
+      let treeData = [];
+      node_list.forEach((item) => {
+        treeData.push({title: item.nodename, key: item.nodecode})
+      })
+      this.setState({treeData: treeData})
     }
   }
 
   /** 更改课本 */
   changeTextbook(value) {
-    console.log(value);
+    // console.log(value);
     this.get_onebook(value[4]);
     // console.log(res);
   }
 
   /** 选择章节 */
-  async changeChapter(value) {
-    await this.setState({current_chapter: value});
-  }
+
+  onLoadData = treeNode => new Promise((resolve) => {
+    if (treeNode.props.children) {
+      resolve();
+      return;
+    }
+    setTimeout(() => {
+      treeNode.props.dataRef.children = [
+        { title: 'Child Node', key: `${treeNode.props.eventKey}-0` },
+        { title: 'Child Node', key: `${treeNode.props.eventKey}-1` },
+      ];
+      this.setState({
+        treeData: [...this.state.treeData],
+      });
+      resolve();
+    }, 1000);
+  })
+  renderTreeNodes = data => data.map((item) => {
+    if (item.children) {
+      return (
+        <TreeNode title={item.title} key={item.key} dataRef={item}>
+          {this.renderTreeNodes(item.children)}
+        </TreeNode>
+      );
+    }
+    return <TreeNode {...item} dataRef={item} />;
+  })
 
   render(){
    return (
      <div className="choose_textbook_model">
-       <Row>
-        <Col span={4}>
-          <p>当前课本：{this.state.current_book}</p>
-        </Col>
-        <Col span={8}>
-          <span className="label">更换课本</span>
-          <Cascader className="choosebook" defaultValue={this.state.default_value} options={this.state.book_list} onChange={this.changeTextbook.bind(this)}
-            placeholder="请选择课本" />
-        </Col>
-        <Col span={12}>
-          <span className="label">选择章节</span>
-          <TreeSelect
-            style={{ width: 300 }}
-            value={this.state.current_chapter}
-            dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-            treeData={this.state.chapter_list}
-            placeholder="请选择章节"
-            treeDefaultExpandAll
-            onChange={this.changeChapter.bind(this)}
-          />
-        </Col>
-       </Row>
+        <p>当前课本：{this.state.current_book}</p>
+        <Cascader className="choosebook" defaultValue={this.state.default_value} options={this.state.book_list} onChange={this.changeTextbook.bind(this)}
+          placeholder="更换课本" />
+        <Tree loadData={this.onLoadData} showLine={true}>
+          {this.renderTreeNodes(this.state.treeData)}
+        </Tree>
      </div>
    )
   }
