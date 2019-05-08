@@ -13,6 +13,12 @@ export async function get_onebook(params) {
     return res.data
 }
 
+/** 获取当前选择章节节点 */
+export async function get_child_node(params) {
+    const res = await http.get(AUTH_API_ROOT + '/resourcenode/get-child-node', {params: params});
+    return res.data
+}
+
 /** 获取科目信息 */
 export async function get_subject(params) {
     const res = await http.get(AUTH_API_ROOT + '/schoolsubject/get-list', {params: params || {}});

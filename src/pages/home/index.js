@@ -123,25 +123,31 @@ class Home extends React.Component {
       return (
         <div className="home_model">
           <Row className="home_model_top">
-            <Col span={4}>
+            <Col span={10}>
               <span className="label">科目</span>
               <SelectFun list={this.state.subject_list} 
               handleChange={this.changeSubject.bind(this)} 
               label={'subject'} value={'subjectid'}
               need_all={true}/>
             </Col>
-            <Col span={4}>
-              <span className="label">排序</span>
+            <Col span={10}>
+              <span className="label" style={{marginRight: '24px'}}>排序</span>
               <SelectFun list={this.state.order_list} 
-              handleChange={this.changeOrder.bind(this)} 
+              handleChange={this.changeOrder.bind(this)}
               label={'label'} value={'value'}
               need_all={false}/>
             </Col>
-            <Col span={7}>
+
+            <Col span={4}>
+              <Button type="primary" onClick={this.export.bind(this)}>导出</Button>
+            </Col>
+          </Row>
+          <Row className="home_model_top">
+            <Col span={10}>
               <span className="label">搜索</span>
               <RangePicker locale={locale} onChange={this.onChangeDateRange.bind(this)} />
             </Col>
-            <Col span={7}>
+            <Col span={14}>
               <span className="label fl">关键字</span>
               <div className="search fl">
                 <Search
@@ -149,9 +155,6 @@ class Home extends React.Component {
                   onSearch={this.searchByKeyword.bind(this)}
                   />
               </div>
-              </Col>
-            <Col span={2}>
-              <Button type="primary" onClick={this.export.bind(this)}>导出</Button>
             </Col>
           </Row>
           {/* <img src={require('../../assets/image/bg.jpg')}></img> */}
