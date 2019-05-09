@@ -9,6 +9,7 @@ import './index.less';
 const Search = Input.Search;
 const Option = Select.Option;
 const {RangePicker} = DatePicker;
+
 const report_columns = [
   {title: '姓名', dataIndex: 'username', key: 'username'},
   {title: '导学本', children: [

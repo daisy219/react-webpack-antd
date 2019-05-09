@@ -16,7 +16,8 @@ class ChooseTextbook extends React.Component {
       current_book: '',
       current_chapter: undefined,
       book_list: [],
-      treeData: [
+      current_node: {},
+      tree_data: [
         { title: 'Expand to load', key: '0' },
         { title: 'Expand to load', key: '1' },
         { title: 'Tree Node', key: '2', isLeaf: true },
@@ -72,21 +73,27 @@ class ChooseTextbook extends React.Component {
     const res = await get_onebook({bookid: bookid});
     if (res.code===200) {
       this.setState({current_book: res.data.tbname})
-      this.get_child_node(bookid)
+      await this.get_child_node(bookid, 'charper')
+      this.setState({tree_data: this.state.current_node})
     }
   }
   
   /** 获取章节节点 */
-  async get_child_node(bookid) {
-    const res = await get_child_node({bookid: bookid});
+  async get_child_node(id, type) {
+    let res = ''
+    if (type === 'charper') {
+      res = await get_child_node({bookid: id});
+    } else {
+      res = await get_child_node({nodeid: id});
+    }
     if (res.code === 200) {
       // console.log(res.data)
       const node_list = res.data;
-      let treeData = [];
+      let tree_data = [];
       node_list.forEach((item) => {
-        treeData.push({title: item.nodename, key: item.nodecode})
+        tree_data.push({title: item.nodename, key: item.nodecode, other_data: item})
       })
-      this.setState({treeData: treeData})
+      this.setState({current_node: tree_data})
     }
   }
 
@@ -98,23 +105,20 @@ class ChooseTextbook extends React.Component {
   }
 
   /** 选择章节 */
-
-  onLoadData = treeNode => new Promise((resolve) => {
+  onLoadData = async (treeNode) => {
+    // console.log(treeNode.props)
     if (treeNode.props.children) {
-      resolve();
       return;
     }
-    setTimeout(() => {
-      treeNode.props.dataRef.children = [
-        { title: 'Child Node', key: `${treeNode.props.eventKey}-0` },
-        { title: 'Child Node', key: `${treeNode.props.eventKey}-1` },
-      ];
+    if (treeNode.props.dataRef.other_data.isHaveChild) {
+      await this.get_child_node(treeNode.props.eventKey, 'node')
+      // console.log(this.state.current_node)
+      treeNode.props.dataRef.children = this.state.current_node;
       this.setState({
-        treeData: [...this.state.treeData],
+        tree_data: [...this.state.tree_data],
       });
-      resolve();
-    }, 1000);
-  })
+    }
+  }
   renderTreeNodes = data => data.map((item) => {
     if (item.children) {
       return (
@@ -131,9 +135,9 @@ class ChooseTextbook extends React.Component {
      <div className="choose_textbook_model">
         <p>当前课本：{this.state.current_book}</p>
         <Cascader className="choosebook" defaultValue={this.state.default_value} options={this.state.book_list} onChange={this.changeTextbook.bind(this)}
-          placeholder="更换课本" />
+          placeholder="更换课本" /> 
         <Tree loadData={this.onLoadData} showLine={true}>
-          {this.renderTreeNodes(this.state.treeData)}
+          {this.renderTreeNodes(this.state.tree_data)}
         </Tree>
      </div>
    )
