@@ -14,6 +14,7 @@ class BaseDialog extends React.Component {
   // this.method = this.method.bind(this);
   }
   showModal() {
+    // this.props.showClick();
     this.setState((prevState, props) =>({
       visible: props.show,
     }));
@@ -30,26 +31,31 @@ class BaseDialog extends React.Component {
     this.setState({ visible: false });
   }
   componentWillMount() {
-    console.log(this.state.visible)
     this.showModal();
+    // console.log(this.state.visible)
+  }
+  componentDidUpdate() {
+    // this.showModal();
+    // this.setState({visible: this.props.show})
+    console.log(this.props.show)
   }
 // METHODS
 
   render(){
-    const { visible, loading } = this.state;
+    // const { visible, loading } = this.state;
     return (
       <div>
         {/* <Button type="primary" onClick={this.showModal.bind(this)}>
           Open Modal with customized footer
         </Button> */}
         <Modal
-          visible={visible}
+          visible={this.state.visible}
           title="Title"
           onOk={this.handleOk.bind(this)}
           onCancel={this.handleCancel.bind(this)}
           footer={[
             <Button key="back" onClick={this.handleCancel.bind(this)}>Return</Button>,
-            <Button key="submit" type="primary" loading={loading} onClick={this.handleOk.bind(this)}>
+            <Button key="submit" type="primary" loading={this.state.loading} onClick={this.handleOk.bind(this)}>
               Submit
             </Button>,
           ]}

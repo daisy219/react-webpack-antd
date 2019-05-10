@@ -86,7 +86,7 @@ class Coach extends React.Component {
   /** 新建作业辅导 */
   newCoach() {
     this.setState({show_add_dialog: true})
-    console.log(this.state.show_add_dialog)
+    // console.log(this.state.show_add_dialog)
   }
 
   render() {
@@ -122,7 +122,9 @@ class Coach extends React.Component {
           </Col>
 
         </Row>
-        <BaseDialog show={this.state.show_add_dialog} showClick={this.newCoach}/>
+        <BaseDialog show={this.state.show_add_dialog}
+          showClick={this.newCoach}
+        />
       </div>
     )
   }
