@@ -17,16 +17,13 @@ class ChooseTextbook extends React.Component {
       current_chapter: undefined,
       book_list: [],
       current_node: {},
-      tree_data: [
-        { title: 'Expand to load', key: '0' },
-        { title: 'Expand to load', key: '1' },
-        { title: 'Tree Node', key: '2', isLeaf: true },
-      ],
+      tree_data: [],
     };
   // this.method = this.method.bind(this);
   }
   componentWillMount() {
     this.get_textbooks();
+
   }
   async get_textbooks () {
     const res = await get_textbooks({source: 1, termid: window.localStorage.getItem("termid")});
@@ -65,8 +62,8 @@ class ChooseTextbook extends React.Component {
       await this.setState({book_list: book_list})
       await this.setState({default_value: [res.data.bookData.stageid, res.data.bookData.subjectid, 
         res.data.bookData.gradeid, res.data.bookData.itemid, res.data.bookData.bookid]})
-      console.log(this.state.default_value)
-      this.get_onebook(res.data.bookData.bookid)
+      this.props.getCurrentBook(res.data.bookData.bookid)
+      this.get_onebook(this.props.bookid)
     }
   }
   async get_onebook(bookid) {
@@ -93,14 +90,16 @@ class ChooseTextbook extends React.Component {
       node_list.forEach((item) => {
         tree_data.push({title: item.nodename, key: item.nodecode, other_data: item})
       })
-      this.setState({current_node: tree_data})
+      await this.setState({current_node: tree_data})
     }
   }
 
   /** 更改课本 */
   changeTextbook(value) {
-    // console.log(value);
-    this.get_onebook(value[4]);
+    // console.log(value)
+    this.props.changeTextbook(value).then(() =>{
+      this.get_onebook(this.props.bookid);
+    })
     // console.log(res);
   }
 
@@ -112,12 +111,17 @@ class ChooseTextbook extends React.Component {
     }
     if (treeNode.props.dataRef.other_data.isHaveChild) {
       await this.get_child_node(treeNode.props.eventKey, 'node')
-      // console.log(this.state.current_node)
       treeNode.props.dataRef.children = this.state.current_node;
+
       this.setState({
         tree_data: [...this.state.tree_data],
       });
     }
+  }
+  onSelect(selectedKeys, e) {
+    this.props.changeNode(selectedKeys).then(()=>{
+      // console.log(this.props.nodeid, 'load')
+    })
   }
   renderTreeNodes = data => data.map((item) => {
     if (item.children) {
@@ -134,9 +138,15 @@ class ChooseTextbook extends React.Component {
    return (
      <div className="choose_textbook_model">
         <p>当前课本：{this.state.current_book}</p>
-        <Cascader className="choosebook" defaultValue={this.state.default_value} options={this.state.book_list} onChange={this.changeTextbook.bind(this)}
+        <Cascader className="choosebook" 
+          defaultValue={this.state.default_value}
+          options={this.state.book_list}
+          onChange={this.changeTextbook.bind(this)}
           placeholder="更换课本" /> 
-        <Tree loadData={this.onLoadData} showLine={true}>
+        <Tree loadData={this.onLoadData} 
+          showLine={true}
+          onSelect={this.onSelect.bind(this)}
+          > 
           {this.renderTreeNodes(this.state.tree_data)}
         </Tree>
      </div>
