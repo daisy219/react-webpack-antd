@@ -36,3 +36,15 @@ export async function export_report() {
     const url = HOMEWORK_API_ROOT + '/api/calculate-analysis/export-comprehensive-report-e';
     return url
 }
+
+/** 获取班级信息 */
+export async function get_teach_class(params) {
+    const res = await http.get(AUTH_API_ROOT + '/teacherclass/get-class-list', {params: params|| {}});
+    return res.data
+}
+
+/** 获取指定班级学生 */
+export async function get_student(params) {
+    const res = await http.post(AUTH_API_ROOT + '/class/get-class-stu', {classid: params || {}});
+    return res.data
+}

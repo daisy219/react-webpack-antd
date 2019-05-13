@@ -10,9 +10,9 @@ let http = {
 http.post = function(api, data) {
   let _data = data;
   Object.assign(_data, {token: Token()})
-  let params = qs.stringify(_data)
+  // let params = qs.stringify(_data)
   return new Promise((resolve, rerject) => {
-    axios.post(api, params).then((res) => {
+    axios.post(api, qs.stringify(_data, {headers:{'Content-Type':'application/x-www-form-urlencoded'}})).then((res) => {
       resolve(res)
     })
   })

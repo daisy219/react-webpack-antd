@@ -1,8 +1,9 @@
 import React from 'react';
 import './index.less';
-import { Cascader, Row, Col, Button, Table } from 'antd';
+import { Checkbox, Row, Col, Button, Table, Input } from 'antd';
 import ChooseTextbook from '../../components/choose_textbook';
 import { get_coach_list } from '../../services/coach';
+import { get_teach_class, get_student } from '../../services/home';
 import BaseDialog from '../../components/base_dialog';
 
 const report_locale = {
@@ -29,6 +30,33 @@ const report_columns = [
 const row_selection = {
   type: 'checkbox'
 }
+/** 选择班级及学生多选框组件 */
+class ClassCheckbox extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  async get_student(item) {
+    const res = await get_student(item.classid)
+    if (res.code===200) {
+      this.props.changeList(item, res.data)
+    }
+    console.log(res);
+  }
+  render() {
+    const checkbox = this.props.list.map((item) => 
+    <div key={item.classid}>
+      <Checkbox onChange={changebox} value={item}>{item.classname}</Checkbox>
+      <span onClick={this.get_student.bind(this, item)} className="cursor_pointer">指定学生</span>
+    </div>
+    )
+    return (
+      checkbox
+    )
+  }
+}
+function changebox(e) {
+  console.log(e)
+}
 
 class Coach extends React.Component {
   constructor(props) {
@@ -42,6 +70,7 @@ class Coach extends React.Component {
         pageline: 10,
       },
       coach_list: [],
+      class_list: [],
     }
   }
   componentWillMount() {
@@ -65,6 +94,7 @@ class Coach extends React.Component {
     }
   }
   async changeTextbook(value) {
+    console.log('ww')
     const params = {
       page: 1,
       pageline: 10,
@@ -77,6 +107,7 @@ class Coach extends React.Component {
     // const nodeid = this.state.nodeid;
   }
   async changeNode(nodeid) {
+    console.log('dd')
 
     await this.setState({nodeid: nodeid})
     await this.setState({params: {...this.state.params, nodecode: nodeid[0]}})
@@ -85,8 +116,17 @@ class Coach extends React.Component {
 
   /** 新建作业辅导 */
   async newCoach() {
-    await this.setState({show_add_dialog: true})
-    // console.log(this.state.show_add_dialog)
+   this.setState({show_add_dialog: true})
+   const res = await get_teach_class({bookid:this.state.bookid})
+   if (res.code===200) {
+    this.setState({class_list: res.data.classes})
+    console.log(res.data.classes)
+    // ClassCheckbox(res.data.classes)
+   }
+  }
+  changeList(item, stu_list) {
+
+    console.log(item, stu_list)
   }
 
   /** 关闭新建弹框 */
@@ -135,7 +175,11 @@ class Coach extends React.Component {
           handleCancel={this.handleCancel.bind(this)}
           handleOk={this.handleOk.bind(this)}
         >
-        <p>ssss</p>
+        <Row>
+          <Col span={4}><span className="label"><i className="red_color">* </i>名称</span></Col>
+          <Col span={20}><Input placeholder="请输入名称"></Input></Col>
+        </Row>
+        <ClassCheckbox list={this.state.class_list} changeList={this.changeList.bind(this)}/>
         </BaseDialog>
       </div>
     )
