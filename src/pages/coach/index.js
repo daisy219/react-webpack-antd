@@ -84,14 +84,22 @@ class Coach extends React.Component {
   }
 
   /** 新建作业辅导 */
-  newCoach() {
-    this.setState({show_add_dialog: true})
+  async newCoach() {
+    await this.setState({show_add_dialog: true})
     // console.log(this.state.show_add_dialog)
   }
 
+  /** 关闭新建弹框 */
+  handleCancel() {
+    this.setState({show_add_dialog: false})
+  }
+  handleOk() {
+    this.setState({show_add_dialog: false})
+  }
   render() {
     const bookid = this.state.bookid;
     const nodeid = this.state.nodeid;
+    const show_add_dialog = this.state.show_add_dialog;
     return (
       <div className="coach_model">
         <Row>
@@ -122,9 +130,13 @@ class Coach extends React.Component {
           </Col>
 
         </Row>
-        <BaseDialog show={this.state.show_add_dialog}
-          showClick={this.newCoach}
-        />
+        <BaseDialog show={show_add_dialog}
+          title='新建作业辅导'
+          handleCancel={this.handleCancel.bind(this)}
+          handleOk={this.handleOk.bind(this)}
+        >
+        <p>ssss</p>
+        </BaseDialog>
       </div>
     )
   }
