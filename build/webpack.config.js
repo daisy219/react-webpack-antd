@@ -12,7 +12,7 @@ let htmlWebpackPlugin = new HtmlWebpackPlugin({
 
 module.exports = {
     // 开发模式
-    mode: 'development',
+    // mode: 'development',
     // 配置入口文件
     entry: './main.js',
     // 出口文件目录为根目录下dist, 输出的文件名为main

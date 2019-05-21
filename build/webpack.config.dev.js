@@ -7,7 +7,7 @@ let htmlWebpackPlugin = new HtmlWebpackPlugin({
     // 虚拟的html文件名 index.html
     filename: 'index.html',
     // 虚拟html的模板为 src下的index.html
-    template: path.resolve(__dirname, './src/index.html')
+    template: path.resolve(__dirname, '../src/index.html')
 })
 
 module.exports = {
