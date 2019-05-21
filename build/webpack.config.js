@@ -38,6 +38,9 @@ module.exports = {
     },
     // 配置loader
     module: {
+        // alias:{
+        //   '@': path.resolve('src'),
+        // },
         // 根据文件后缀匹配规则
         rules: [
           {

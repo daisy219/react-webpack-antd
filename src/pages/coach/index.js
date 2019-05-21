@@ -3,8 +3,8 @@ import './index.less';
 import { Checkbox, Row, Col, Button, Table, Input, Icon } from 'antd';
 import ChooseTextbook from '../../components/choose_textbook';
 import { get_coach_list } from '../../services/coach';
-import { get_teach_class, get_student } from '../../services/home';
-import BaseDialog from '../../components/base_dialog';
+import { get_teach_class } from '../../services/home';
+import NewCoach from './_part/new_coach';
 
 const report_locale = {
   emptyText: '暂无数据'
@@ -30,55 +30,6 @@ const report_columns = [
 const row_selection = {
   type: 'checkbox'
 }
-const StudentList = (props)=> {
-  if ( props.stu_show ) {
-    const stu_checkbox = props.stu_list.map((item) => 
-      <div key={item.id}>
-        <Checkbox className="fl">{item.name}</Checkbox>
-      </div>
-    )
-    return (stu_checkbox)
-  } else {
-    return null
-  }
-}
-/** 选择班级及学生多选框组件 */
-class ClassCheckbox extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      stu_show: false,
-    }
-  }
-  async get_student(item) {
-    // console.log(item)
-    if(!item.stu_list) {
-      const res = await get_student(item.classid)
-      if (res.code===200) {
-        this.props.changeList(item, res.data)
-      }
-    }
-    this.setState({stu_show: !this.state.stu_show})
-  }
-
-  render() {
-    const checkbox = this.props.list.map((item) => 
-    <div key={item.classid}>
-      <Checkbox onChange={changebox} value={item}>{item.classname}</Checkbox>
-      <span onClick={this.get_student.bind(this, item)} className="cursor_pointer">指定学生
-      {this.state.stu_show ? <Icon type="caret-up" /> : <Icon type="caret-down" />}
-      </span>
-      <StudentList stu_list={item.stu_list} stu_show={this.state.stu_show}/>
-    </div>
-    )
-    return (
-      checkbox
-    )
-  }
-}
-function changebox(e) {
-  console.log(e)
-}
 
 class Coach extends React.Component {
   constructor(props) {
@@ -86,19 +37,23 @@ class Coach extends React.Component {
     this.state = {
       bookid: '',
       nodeid: '1',
-      show_add_dialog: false,
+      show_add_dialog: false,  // 新建作业辅导弹框
       params: {
         page: 1,
         pageline: 10,
       },
       coach_list: [],
       class_list: [],
+      stu_show: false,  // 是否展示新建弹框中班级学生列表
+      plainOptions: [], // 选中的学生
+      checked_class: [], // 选中的班级
     }
   }
   componentWillMount() {
     this.getCurrentBook()
-    
   }
+
+  /** 获取当前课本 */
   async getCurrentBook(bookId) {
     await this.setState({bookid: bookId})
     const params = {
@@ -109,12 +64,16 @@ class Coach extends React.Component {
     await this.setState({params: params})
     this.get_coach_list();
   }
+
+  /** 获取作业辅导列表 */
   async get_coach_list() {
     const res = await get_coach_list(this.state.params);
     if (res.code === 200) {
       this.setState({coach_list: res.data.datalist});
     }
   }
+
+  /** 修改课本 */
   async changeTextbook(value) {
     console.log('ww')
     const params = {
@@ -128,6 +87,8 @@ class Coach extends React.Component {
     this.get_coach_list();
     // const nodeid = this.state.nodeid;
   }
+
+  /** 修改章节节点 */
   async changeNode(nodeid) {
     console.log('dd')
 
@@ -138,35 +99,59 @@ class Coach extends React.Component {
 
   /** 新建作业辅导 */
   async newCoach() {
-   this.setState({show_add_dialog: true})
-   const res = await get_teach_class({bookid:this.state.bookid})
-   if (res.code===200) {
-    this.setState({class_list: res.data.classes})
-    console.log(res.data.classes)
-    // ClassCheckbox(res.data.classes)
-   }
+    this.setState({checked_class: []})
+    this.setState({show_add_dialog: true})
+    this.setState({stu_show: false})
+    const res = await get_teach_class({bookid:this.state.bookid})
+    if (res.code===200) {
+      this.setState({class_list: res.data.classes})
+      console.log(res.data.classes)
+      // ClassCheckbox(res.data.classes)
+    }
   }
-  changeList(current_class, stu_list) {
-    // console.log(current_class, stu_list)
-    let class_list = this.state.class_list;
-    class_list && class_list.forEach((item, index) => {
-      console.log(item.classid, current_class.classid)
-      if(item.classid === current_class.classid) {
-        class_list[index].stu_list = stu_list;
-        console.log(class_list)
-      }
-    })
-    this.setState({class_list: class_list})
-    // console.log(this.state.class_list)
+
+  /** 控制是否展示具体学生名单 */
+  changeShow() {
+    this.setState({stu_show: !this.state.stu_show})
   }
 
   /** 关闭新建弹框 */
   handleCancel() {
     this.setState({show_add_dialog: false})
   }
-  handleOk() {
+
+  /** 新建作业辅导提交 */
+  submit() {
     this.setState({show_add_dialog: false})
   }
+  /** 点击班级checkbox */
+  changebox(e) {
+    if (e.checked) {
+      const checked_class = [];
+      checked_class.push()
+    }
+    console.log(e.target)
+  }
+  /** 班级列表中加入学生 */
+  changeList(current_class, stu_list) {
+    // console.log(current_class, stu_list)
+    let class_list = this.state.class_list;
+    class_list && class_list.forEach((item, index) => {
+      console.log(item.classid, current_class.classid)
+      if(item.classid === current_class.classid) {
+        const options = [];
+        class_list[index].stu_list = stu_list;
+        stu_list.forEach(stu => { 
+          options.push(stu.name)
+        })
+        class_list[index].options = options;
+        console.log(class_list)
+      }
+    })
+    this.setState({class_list: class_list})
+    console.log(this.state.class_list)
+  }
+
   render() {
     const bookid = this.state.bookid;
     const nodeid = this.state.nodeid;
@@ -201,17 +186,16 @@ class Coach extends React.Component {
           </Col>
 
         </Row>
-        <BaseDialog show={show_add_dialog}
-          title='新建作业辅导'
+        <NewCoach 
+          show_add_dialog={show_add_dialog} 
+          class_list={this.state.class_list}
+          stu_show={this.state.stu_show}
+          changeList={this.changeList.bind(this)}
+          changeShow={this.changeShow.bind(this)}
+          changebox={this.changebox.bind(this)}
           handleCancel={this.handleCancel.bind(this)}
-          handleOk={this.handleOk.bind(this)}
-        >
-          <Row>
-            <Col span={4}><span className="label"><i className="red_color">* </i>名称</span></Col>
-            <Col span={20}><Input placeholder="请输入名称"></Input></Col>
-          </Row>
-          <ClassCheckbox list={this.state.class_list} changeList={this.changeList.bind(this)}/>
-        </BaseDialog>
+          submit={this.submit.bind(this)}
+          ></NewCoach>
       </div>
     )
   }
