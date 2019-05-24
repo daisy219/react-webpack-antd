@@ -1,8 +1,9 @@
 import ReactDOM from 'react-dom';
 import React,{ Component } from 'react';
+import { Provider } from 'react-redux';
 // import { BrowserRouter } from 'react-router-dom';
-import StartRoute from './src/router/index'
-
+import StartRoute from './src/router/index';
+import store from './src/store/store.js'
 import './src/assets/index.less';
 /**
  * YDUI 可伸缩布局方案
@@ -42,6 +43,7 @@ import './src/assets/index.less';
     doc.addEventListener('DOMContentLoaded', recalc, false);
 
 }(window);
+// const store = createStore(rootReducer)
 
 class App extends Component{
     render(){
@@ -53,5 +55,7 @@ class App extends Component{
     }
 }
 ReactDOM.render((
+    <Provider store={store}>
         <App />
+    </Provider>
 ), document.getElementById('root'))

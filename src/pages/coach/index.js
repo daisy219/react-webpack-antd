@@ -51,6 +51,9 @@ class Coach extends React.Component {
   }
   componentWillMount() {
     this.getCurrentBook()
+    const words = ['safadf', 'daf', 'asfdfas', 'eee', 'cccvc'];
+    const result = words.filter(word => word.length > 3);
+    console.log(result);
   }
 
   /** 获取当前课本 */
