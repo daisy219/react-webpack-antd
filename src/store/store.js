@@ -48,6 +48,7 @@ import combineReducers from './reducers/index'
 // Create a Redux store holding the state of your app.
 // Its API is { subscribe, dispatch, getState }.
 let store = createStore(combineReducers)
+console.log(store.getState())
 // console.log("initial state: ", store.getState());
 // You can use subscribe() to update the UI in response to state changes.
 // Normally you'd use a view binding library (e.g. React Redux) rather than subscribe() directly.
@@ -58,7 +59,7 @@ let store = createStore(combineReducers)
 // The only way to mutate the internal state is to dispatch an action.
 // The actions can be serialized, logged or stored and later replayed.
 
-store.dispatch({ type: 'ADD_TODO' })
+// store.dispatch({ type: 'ADD_TODO' })
 // 1
 // store.dispatch({ type: 'INCREMENT' })
 // // 2
