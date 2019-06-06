@@ -3,6 +3,7 @@ import { toggleTodo } from '../action/index'
 import TodoList from '../../components/TodoList'
 
 const getVisibleTodos = (todos, filter) => {
+  // console.log(todos, filter)
   switch (filter) {
     case 'SHOW_COMPLETED':
       return todos.filter(t => t.completed)

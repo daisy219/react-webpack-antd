@@ -2,7 +2,7 @@ import React from 'react';
 import Footer from '../../components/Footer'
 import AddTodo from '../../store/containers/AddTodo'
 import VisibleTodoList from '../../store/containers/VisibleTodoList'
-
+import NumDisplay from '../../store/containers/num_display'
 class Worry extends React.Component {
   render() {
     return (
@@ -11,6 +11,7 @@ class Worry extends React.Component {
         <AddTodo />
         <VisibleTodoList />
         <Footer />
+        <NumDisplay />
       </div>
     )
   }

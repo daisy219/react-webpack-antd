@@ -20,3 +20,15 @@ export const VisibilityFilters = {
   SHOW_COMPLETED: 'SHOW_COMPLETED',
   SHOW_ACTIVE: 'SHOW_ACTIVE'
 }
+
+export const add_num = num => ({
+  type: 'ADD',
+  // num
+  // num: num ++,
+})
+
+export const reduce_num = num => ({
+  type: 'REDUCE',
+  // num
+  // num: num - 1,
+})
