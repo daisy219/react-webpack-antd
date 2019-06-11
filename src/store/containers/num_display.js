@@ -24,8 +24,8 @@ import { add_num, reduce_num } from '../action/index'
 //   }
 // }
 const NumDisplay =({ final_num, visibilityFilter, add_num, reduce_num }) => {
-  console.log(final_num)
-  console.log(add_num)
+  // console.log(final_num)
+  // console.log(add_num)
   return (
       <div>
        <Button onClick={ () => {

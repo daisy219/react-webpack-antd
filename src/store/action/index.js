@@ -21,14 +21,24 @@ export const VisibilityFilters = {
   SHOW_ACTIVE: 'SHOW_ACTIVE'
 }
 
-export const add_num = num => ({
+export const add_num = () => ({
   type: 'ADD',
   // num
   // num: num ++,
 })
 
-export const reduce_num = num => ({
+export const reduce_num = () => ({
   type: 'REDUCE',
   // num
   // num: num - 1,
+})
+
+export const current_textbook = () => ({
+  type: 'CHOOES_TEXTBOOK'
+})
+
+export const select_name = (current) => ({
+  type: 'SELETE_NAME',
+  name: current.name,
+  value: current.value
 })
