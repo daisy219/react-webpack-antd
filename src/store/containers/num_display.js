@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 // import { Icon, Menu, Divider} from 'antd';
 import { Button } from 'antd';
 import { add_num, reduce_num } from '../action/index'
+
 // class NumDisplay extends React.Component {
 //   constructor(props) {
 //     super(props);

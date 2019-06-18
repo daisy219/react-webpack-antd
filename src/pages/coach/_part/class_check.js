@@ -8,7 +8,7 @@ function changeStuCheck(e) {
   console.log(e)
   // console.log(props)
 }
-const StudentList = (props)=> {
+const StudentList = (props) => {
   if ( props.stu_show && props.stu_list && props.stu_list.length!==0 ) {
     const stu_checkbox = props.stu_list.map((item) => 
       <div key={item.id}>

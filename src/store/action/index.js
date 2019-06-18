@@ -37,8 +37,8 @@ export const current_textbook = () => ({
   type: 'CHOOES_TEXTBOOK'
 })
 
-export const select_name = (current) => ({
+export const select_name = (value) => ({
   type: 'SELETE_NAME',
-  name: current.name,
-  value: current.value
+  // name: current.name,
+  value: value
 })
