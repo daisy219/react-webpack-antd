@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.less';
 import { Checkbox, Row, Col, Button, Table, Input, Icon } from 'antd';
-import ChooseTextbook from '../../components/choose_textbook';
+import BookAndChapterTree from '../../components/choose_textbook';
 import { get_coach_list } from '../../services/coach';
 import { get_teach_class } from '../../services/home';
 import NewCoach from './_part/new_coach';
@@ -78,7 +78,6 @@ class Coach extends React.Component {
 
   /** 修改课本 */
   async changeTextbook(value) {
-    console.log('ww')
     const params = {
       page: 1,
       pageline: 10,
@@ -163,7 +162,7 @@ class Coach extends React.Component {
       <div className="coach_model">
         <Row>
           <Col span={6}>
-            <ChooseTextbook
+            <BookAndChapterTree
               changeTextbook={this.changeTextbook.bind(this)}
               bookid={bookid}
               changeNode={this.changeNode.bind(this)}

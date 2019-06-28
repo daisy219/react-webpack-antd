@@ -13,12 +13,12 @@ class Seletename extends React.Component {
     super(props);
   }
   componentWillMount() {
-    this.props.selete_name(this.props.name_list[0].value);
+    this.props.select_name(this.props.name_list[0].value);
     this.props.changename(this.props.name_list[0].value);
   }
   changeName(value) {
     // console.log(value);
-    this.props.selete_name(value);
+    this.props.select_name(value);
     this.props.changename(value);
   }
   // console.log(add_num)
@@ -46,7 +46,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  selete_name: value => dispatch(select_name(value))
+  select_name: value => dispatch(select_name(value))
   // add_num,reduce_num
 })
 

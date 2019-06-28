@@ -6,7 +6,7 @@ import Footer from '../../components/Footer'
 import AddTodo from '../../store/containers/AddTodo'
 import VisibleTodoList from '../../store/containers/VisibleTodoList'
 import NumDisplay from '../../store/containers/num_display' // redux练习
-import ChooseTextbook from '../../components/choose_textbook'
+import BookAndChapterTree from '../../components/choose_textbook'
 import SeleteName from '../../store/containers/selete_name'
 
 
@@ -27,12 +27,13 @@ class Wrong extends React.Component {
   componentWillMount() {
   }
   async changeTextbook(value) {
+    // console.log(value)
     await this.setState({bookid: value[4]})
-    await this.setState({params: params});
+    // await this.setState({params: {...this.state.params}});
   }
   async changeNode(nodeid) {
     await this.setState({nodeid: nodeid})
-    await this.setState({params: {...this.state.params, nodecode: nodeid[0]}})
+    // await this.setState({params: {...this.state.params, nodecode: nodeid[0]}})
 
   }
   async getCurrentBook(bookId) {
@@ -43,7 +44,6 @@ class Wrong extends React.Component {
     // this.setState({current_value: })
     // console.log(this.props)
     // this.props.selete_name(value);
-    console.log(`selected ${value}`);
     // const current_name = {
     //   name: 
     // }
@@ -57,7 +57,7 @@ class Wrong extends React.Component {
       <div className="wrong_model">
         <Row>
           <Col span={6}>
-            <ChooseTextbook
+            <BookAndChapterTree
               changeTextbook={this.changeTextbook.bind(this)}
               bookid={bookid}
               changeNode={this.changeNode.bind(this)}

@@ -7,9 +7,10 @@ import React from 'react';
 import { Cascader, Row, Col, Tree  } from 'antd';
 import { get_textbooks, get_onebook, get_child_node } from '../services/home';
 import './style/choose_textbook.less';
+import ChooseTextbook from '../store/containers/textbook';
 // import { Icon, Menu, Divider} from 'antd';
 const { TreeNode } = Tree;
-class ChooseTextbook extends React.Component {
+class BookAndChapterTree extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -95,8 +96,8 @@ class ChooseTextbook extends React.Component {
   }
 
   /** 更改课本 */
-  changeTextbook(value) {
-    // console.log(value)
+  changebook(value) {
+    // console.log(this.state.current_book)
     this.props.changeTextbook(value).then(() =>{
       this.get_onebook(this.props.bookid);
     })
@@ -137,13 +138,12 @@ class ChooseTextbook extends React.Component {
   render(){
    return (
      <div className="choose_textbook_model">
-        <p>当前课本：{this.state.current_book}</p>
-        <Cascader className="choosebook" 
-          defaultValue={this.state.default_value}
-          options={this.state.book_list}
-          onChange={this.changeTextbook.bind(this)}
-          placeholder="更换课本" /> 
-        <Tree loadData={this.onLoadData} 
+        {/* <p>当前课本：{this.state.current_book}</p> */}
+          <ChooseTextbook default_value={this.state.default_value} 
+            book_list={this.state.book_list}
+            changebook={this.changebook.bind(this)}
+            current_bookname={this.state.current_book}/>
+        <Tree loadData={this.onLoadData}
           showLine={true}
           onSelect={this.onSelect.bind(this)}
           > 
@@ -153,4 +153,4 @@ class ChooseTextbook extends React.Component {
    )
   }
 }
-export default ChooseTextbook
+export default BookAndChapterTree

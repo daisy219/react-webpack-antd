@@ -6,7 +6,7 @@ class TodoList extends React.Component {
     super(props);
   }
   componentWillMount() {
-    console.log(this.props)
+    // console.log(this.props)
   }
   render() {
     return (

@@ -33,8 +33,9 @@ export const reduce_num = () => ({
   // num: num - 1,
 })
 
-export const current_textbook = () => ({
-  type: 'CHOOES_TEXTBOOK'
+export const choose_textbook = (bookinfo) => ({
+  type: 'CHOOES_TEXTBOOK',
+  bookinfo: bookinfo
 })
 
 export const select_name = (value) => ({
