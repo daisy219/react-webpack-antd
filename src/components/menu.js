@@ -19,9 +19,6 @@ class MainMenu extends React.Component{
         // console.log(res)
     }
     handleClick(e) {
-        console.log(e)
-        
-        console.log(this.props.currentPage)
         this.setState({ current: e.key})
     }
     render(){

@@ -27,13 +27,11 @@ class Login extends React.Component {
   }
   nameChange(event) {
     this.setState({userName: event.target.value})
-    console.log(this.state.value)
   }
   passChange(event) {
     this.setState({password: event.target.value})
   }
   async login() {
-    console.log('触发')
     login_web({username: this.state.userName, password: this.state.password}).then((data) => {
       if (data.data.code===200) {
         message.info('登录成功');

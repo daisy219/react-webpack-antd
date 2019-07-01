@@ -32,7 +32,7 @@ export const reduce_num = () => ({
   // num
   // num: num - 1,
 })
-
+// 课本信息
 export const choose_textbook = (bookinfo) => ({
   type: 'CHOOES_TEXTBOOK',
   bookinfo: bookinfo
@@ -40,6 +40,19 @@ export const choose_textbook = (bookinfo) => ({
 
 export const select_name = (value) => ({
   type: 'SELETE_NAME',
+  // name: current.name,
+  value: value
+})
+// 章节树信息
+export const change_chapter_tree = (value) => ({
+  type: 'CHAPTER_TREE',
+  // name: current.name,
+  value: value
+})
+
+// 课本列表
+export const save_book_list = (value) => ({
+  type: 'BOOK_LIST',
   // name: current.name,
   value: value
 })

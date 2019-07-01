@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.less';
 import { Checkbox, Row, Col, Button, Table, Input, Icon } from 'antd';
-import BookAndChapterTree from '../../components/choose_textbook';
+import BookAndChapterTree from '../../components/book_and_chapter';
 import { get_coach_list } from '../../services/coach';
 import { get_teach_class } from '../../services/home';
 import NewCoach from './_part/new_coach';
@@ -53,7 +53,6 @@ class Coach extends React.Component {
     this.getCurrentBook()
     const words = ['safadf', 'daf', 'asfdfas', 'eee', 'cccvc'];
     const result = words.filter(word => word.length > 3);
-    console.log(result);
   }
 
   /** 获取当前课本 */
@@ -78,6 +77,7 @@ class Coach extends React.Component {
 
   /** 修改课本 */
   async changeTextbook(value) {
+    console.log(value);
     const params = {
       page: 1,
       pageline: 10,
@@ -92,7 +92,6 @@ class Coach extends React.Component {
 
   /** 修改章节节点 */
   async changeNode(nodeid) {
-    console.log('dd')
 
     await this.setState({nodeid: nodeid})
     await this.setState({params: {...this.state.params, nodecode: nodeid[0]}})

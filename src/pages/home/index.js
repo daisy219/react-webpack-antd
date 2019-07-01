@@ -78,7 +78,6 @@ class Home extends React.Component {
 
     /** 选择的排序发生变化 */
     async changeOrder(value) {
-      // console.log(`selected ${value}`);
       await this.setState({get_report_parames: {...this.state.get_report_parames, ordertype: value}});
       this.get_report_list();
     }
@@ -100,7 +99,6 @@ class Home extends React.Component {
     async export() {
       const api = await export_report()
       const params = Object.assign(this.state.get_report_parames, {token: Token()})
-      console.log(params)
       use_form_download('get', api, params)
     }
     render(){

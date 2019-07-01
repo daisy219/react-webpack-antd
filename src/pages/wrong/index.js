@@ -6,7 +6,7 @@ import Footer from '../../components/Footer'
 import AddTodo from '../../store/containers/AddTodo'
 import VisibleTodoList from '../../store/containers/VisibleTodoList'
 import NumDisplay from '../../store/containers/num_display' // redux练习
-import BookAndChapterTree from '../../components/choose_textbook'
+import BookAndChapterTree from '../../components/book_and_chapter'
 import SeleteName from '../../store/containers/selete_name'
 
 
