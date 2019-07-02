@@ -8,7 +8,6 @@ import React from 'react';
 import { get_textbooks, get_onebook, get_child_node } from '../services/home';
 import './style/choose_textbook.less';
 import ChooseTextbook from '../store/containers/textbook';
-// import { Icon, Menu, Divider} from 'antd';
 class BookAndChapterTree extends React.Component {
   constructor(props) {
     super(props);
@@ -22,28 +21,20 @@ class BookAndChapterTree extends React.Component {
   componentWillMount() {
     // this.get_textbooks();
   }
-
-  // async get_onebook(bookid) {
-  //   await this.get_child_node(bookid, 'charper')
-  //   this.setState({tree_data: this.state.current_node})
-  // }
-
-  // emit_bookid(bookid) {
-  //   this.setState({bookid: bookid});
-  // }
-  /** 更改课本 */
-  changebook(value) {
-    // console.log(value);
-    this.props.changeTextbook(value).then(() =>{
-      // this.get_onebook(this.props.bookid);
-    })
+  changeNode(nodeid) {
+    // console.log(nodeid);
+    this.props.changeNode(nodeid);
+  }
+  getCurrentBook(bookid) {
+    this.props.getCurrentBook(bookid);
   }
 
   render(){
    return (
      <div className="choose_textbook_model">
         <ChooseTextbook
-          changebook={this.changebook.bind(this)}/>
+          changeNode={this.changeNode.bind(this)}
+          getCurrentBook={this.getCurrentBook.bind(this)}/>
      </div>
    )
   }

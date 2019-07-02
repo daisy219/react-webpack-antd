@@ -7,7 +7,7 @@ const Option = Select.Option;
 export function SelectFun(props) {
   const list = props.list;
   if (!list) {
-    return null
+    return null;
   }
   const list_item = list.map((item) =>
     <Option key={item[props.value]}>{item[props.label]}</Option>

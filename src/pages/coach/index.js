@@ -50,20 +50,20 @@ class Coach extends React.Component {
     }
   }
   componentWillMount() {
-    this.getCurrentBook()
+    // this.getCurrentBook();
     const words = ['safadf', 'daf', 'asfdfas', 'eee', 'cccvc'];
     const result = words.filter(word => word.length > 3);
   }
 
   /** 获取当前课本 */
   async getCurrentBook(bookId) {
-    await this.setState({bookid: bookId})
+    await this.setState({bookid: bookId});
     const params = {
       page: 1,
       pageline: 10,
       bookId: bookId
     }
-    await this.setState({params: params})
+    await this.setState({params: params});
     this.get_coach_list();
   }
 
@@ -75,64 +75,50 @@ class Coach extends React.Component {
     }
   }
 
-  /** 修改课本 */
-  async changeTextbook(value) {
-    console.log(value);
-    const params = {
-      page: 1,
-      pageline: 10,
-      bookId: value[4]
-    }
-    // console.log(value)
-    await this.setState({bookid: value[4]})
-    await this.setState({params: params});
-    this.get_coach_list();
-    // const nodeid = this.state.nodeid;
-  }
-
-  /** 修改章节节点 */
+  /** 点击章节节点 */
   async changeNode(nodeid) {
-
-    await this.setState({nodeid: nodeid})
-    await this.setState({params: {...this.state.params, nodecode: nodeid[0]}})
+    await this.setState({nodeid: nodeid});
+    await this.setState({params: {...this.state.params, nodecode: nodeid[0]}});
     this.get_coach_list();
   }
 
   /** 新建作业辅导 */
   async newCoach() {
-    this.setState({checked_class: []})
-    this.setState({show_add_dialog: true})
-    this.setState({stu_show: false})
-    const res = await get_teach_class({bookid:this.state.bookid})
+    this.setState({checked_class: []});
+    this.setState({show_add_dialog: true});
+    this.setState({stu_show: false});
+    const res = await get_teach_class({bookid:this.state.bookid});
     if (res.code===200) {
-      this.setState({class_list: res.data.classes})
-      console.log(res.data.classes)
+      this.setState({class_list: res.data.classes});
+      console.log(res.data.classes);
       // ClassCheckbox(res.data.classes)
     }
   }
 
   /** 控制是否展示具体学生名单 */
   changeShow() {
-    this.setState({stu_show: !this.state.stu_show})
+    this.setState({stu_show: !this.state.stu_show});
   }
 
   /** 关闭新建弹框 */
   handleCancel() {
-    this.setState({show_add_dialog: false})
+    this.setState({show_add_dialog: false});
   }
 
   /** 新建作业辅导提交 */
   submit() {
-    this.setState({show_add_dialog: false})
+    this.setState({show_add_dialog: false});
   }
+
   /** 点击班级checkbox */
   changebox(e) {
     if (e.checked) {
       const checked_class = [];
-      checked_class.push()
+      checked_class.push();
     }
-    console.log(e.target)
+    console.log(e.target);
   }
+
   /** 班级列表中加入学生 */
   changeList(current_class, stu_list) {
     // console.log(current_class, stu_list)
@@ -162,7 +148,7 @@ class Coach extends React.Component {
         <Row>
           <Col span={6}>
             <BookAndChapterTree
-              changeTextbook={this.changeTextbook.bind(this)}
+              
               bookid={bookid}
               changeNode={this.changeNode.bind(this)}
               nodeid={nodeid}

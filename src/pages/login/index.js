@@ -1,9 +1,9 @@
 import React from 'react';
 import { Input, Button, message } from 'antd';
-import { login_web } from '../../services/login'
-import { Token, setCookie } from '../../utils/utils'
+import { login_web } from '../../services/login';
+import { Token, setCookie } from '../../utils/utils';
 
-import './index.less'
+import './index.less';
 // import imgURL from '../../assets/image/bg.jpg';
 
 class Login extends React.Component {
@@ -20,26 +20,26 @@ class Login extends React.Component {
   }
   componentWillMount() {
     if (!Token() || Token()==='null') {
-      this.setState({isLogin: false})
+      this.setState({isLogin: false});
     } else {
-      this.setState({isLogin: true})
+      this.setState({isLogin: true});
     }
   }
   nameChange(event) {
-    this.setState({userName: event.target.value})
+    this.setState({userName: event.target.value});
   }
   passChange(event) {
-    this.setState({password: event.target.value})
+    this.setState({password: event.target.value});
   }
   async login() {
     login_web({username: this.state.userName, password: this.state.password}).then((data) => {
       if (data.data.code===200) {
         message.info('登录成功');
-        this.setState({isLogin: true})
+        this.setState({isLogin: true});
         this.props.history.replace('/teacher');
-        setCookie('platform_token', data.data.token)
+        setCookie('platform_token', data.data.token);
         var storage = null;
-          if(window.localStorage){              //判断浏览器是否支持localStorage
+          if (window.localStorage) {              //判断浏览器是否支持localStorage
             storage = window.localStorage;     
             storage.setItem("termid", data.data.data.termVos[0].termid);    //调用setItem方法，存储数据
             // alert(storage.getItem("termid"));     //调用getItem方法，弹框显示 name 为 Rick

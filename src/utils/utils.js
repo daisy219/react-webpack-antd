@@ -11,7 +11,7 @@ export function setCookie(name,value) {
  */
 export function Token() {
     var arr,reg=new RegExp("(^| )platform_token=([^;]*)(;|$)"); //正则匹配
-    if(arr=document.cookie.match(reg)){
+    if (arr=document.cookie.match(reg)) {
       return unescape(arr[2]);
     }
     else{
@@ -26,14 +26,14 @@ export function Token() {
  * @return {Void}
  */
 export const use_iframe_download = download_path => {
-  const $iframe = document.createElement('iframe')
+  const $iframe = document.createElement('iframe');
 
-  $iframe.style.height = '0px'
-  $iframe.style.width = '0px'
-  document.body.appendChild($iframe)
-  $iframe.setAttribute('src', download_path)
+  $iframe.style.height = '0px';
+  $iframe.style.width = '0px';
+  document.body.appendChild($iframe);
+  $iframe.setAttribute('src', download_path);
 
-  setTimeout(function () { $iframe.remove() }, 20000)
+  setTimeout(function () { $iframe.remove() }, 20000);
 }
 
 /**

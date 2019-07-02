@@ -5,9 +5,9 @@ const select_name = (state = '', action) => {
     //     // name: action.name,
     //     value: action.value
     // };
-    return action.value
+    return action.value;
     default:
-      return state
+      return state;
   }
 }
 export default select_name

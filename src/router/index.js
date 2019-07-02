@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
-import { Token } from '../utils/utils'
+import { Token } from '../utils/utils';
 import Login from '../pages/login/index';
 import Layout from '../layout/index';
 

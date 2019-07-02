@@ -8,18 +8,18 @@ const MenuItemGroup = Menu.ItemGroup;
 
 class MainMenu extends React.Component{
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             current: 'home'
-        }
-        this.handleClick = this.handleClick.bind(this)
+        };
+        this.handleClick = this.handleClick.bind(this);
     }
     async test() {
         // const res = await http.get(api_address + '/auth/efficiencyLogin?username=102932001&password=123456&roletype=2')
         // console.log(res)
     }
     handleClick(e) {
-        this.setState({ current: e.key})
+        this.setState({ current: e.key});
     }
     render(){
         // this.test()

@@ -5,7 +5,7 @@ import React from 'react';
 import { Icon, Checkbox } from 'antd';
 import { get_student } from '../../../services/home';
 function changeStuCheck(e) {
-  console.log(e)
+  console.log(e);
   // console.log(props)
 }
 const StudentList = (props) => {
@@ -15,9 +15,9 @@ const StudentList = (props) => {
         <Checkbox className="fl" onChange={changeStuCheck} options={props.plainOptions}>{item.name}</Checkbox>
       </div>
     )
-    return (stu_checkbox)
+    return (stu_checkbox);
   } else {
-    return null
+    return null;
   }
 }
 class ClassCheckbox extends React.Component {
@@ -30,11 +30,11 @@ class ClassCheckbox extends React.Component {
 
   async get_student(item) {
     // console.log(item)
-    this.props.changeShow()
+    this.props.changeShow();
     if (!item.stu_list) {
-      const res = await get_student(item.classid)
+      const res = await get_student(item.classid);
       if (res.code===200) {
-        this.props.changeList(item, res.data)
+        this.props.changeList(item, res.data);
       }
     }
   }

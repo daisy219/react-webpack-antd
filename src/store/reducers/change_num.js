@@ -5,7 +5,7 @@ const test_num = (state = 0, action) => {
     case 'REDUCE':
       return state-1;
     default:
-      return state
+      return state;
   }
 }
 export default test_num

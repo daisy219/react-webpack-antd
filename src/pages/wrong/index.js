@@ -2,12 +2,12 @@ import React from 'react';
 
 import { Checkbox, Row, Col, Button, Table, Input, Icon, Select } from 'antd';
 
-import Footer from '../../components/Footer'
-import AddTodo from '../../store/containers/AddTodo'
-import VisibleTodoList from '../../store/containers/VisibleTodoList'
-import NumDisplay from '../../store/containers/num_display' // redux练习
-import BookAndChapterTree from '../../components/book_and_chapter'
-import SeleteName from '../../store/containers/selete_name'
+import Footer from '../../components/Footer';
+import AddTodo from '../../store/containers/AddTodo';
+import VisibleTodoList from '../../store/containers/VisibleTodoList';
+import NumDisplay from '../../store/containers/num_display'; // redux练习
+import BookAndChapterTree from '../../components/book_and_chapter';
+import SeleteName from '../../store/containers/selete_name';
 
 
 class Wrong extends React.Component {
@@ -28,19 +28,19 @@ class Wrong extends React.Component {
   }
   async changeTextbook(value) {
     // console.log(value)
-    await this.setState({bookid: value[4]})
+    await this.setState({bookid: value[4]});
     // await this.setState({params: {...this.state.params}});
   }
   async changeNode(nodeid) {
-    await this.setState({nodeid: nodeid})
+    await this.setState({nodeid: nodeid});
     // await this.setState({params: {...this.state.params, nodecode: nodeid[0]}})
 
   }
   async getCurrentBook(bookId) {
-    await this.setState({bookid: bookId})
+    await this.setState({bookid: bookId});
   }
   changeName(value) {
-    this.setState({current_select: value})
+    this.setState({current_select: value});
     // this.setState({current_value: })
     // console.log(this.props)
     // this.props.selete_name(value);

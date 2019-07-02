@@ -2,7 +2,7 @@
 import React from 'react';
 import locale from 'antd/lib/date-picker/locale/zh_CN';
 import { SelectFun } from '../../components/comment_com';
-import { Token, use_form_download } from '../../utils/utils'
+import { Token, use_form_download } from '../../utils/utils';
 import { Select, Row, Col, Table, Button, Input, Icon, DatePicker } from 'antd';
 import { get_subject, get_report, export_report } from '../../services/home';
 import './index.less';
@@ -59,7 +59,7 @@ class Home extends React.Component {
     /** 获取首页列表 */
     async get_report_list() {
       const res = await get_report(this.state.get_report_parames);
-      this.setState({report_list: res.data.datalist})
+      this.setState({report_list: res.data.datalist});
     }
     
     /** 获取科目信息 */
@@ -72,7 +72,7 @@ class Home extends React.Component {
     async changeSubject(value) {
       console.log(`selected ${value}`);
       await this.setState({get_report_parames: {...this.state.get_report_parames, orderby: value}});
-      console.log(this.state.get_report_parames)
+      console.log(this.state.get_report_parames);
       this.get_report_list();
     }
 
@@ -98,8 +98,8 @@ class Home extends React.Component {
     /** 导出 */
     async export() {
       const api = await export_report()
-      const params = Object.assign(this.state.get_report_parames, {token: Token()})
-      use_form_download('get', api, params)
+      const params = Object.assign(this.state.get_report_parames, {token: Token()});
+      use_form_download('get', api, params);
     }
     render(){
         // this.test()
