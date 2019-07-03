@@ -1,6 +1,6 @@
 import React from 'react';
 import './index.less';
-import { Checkbox, Row, Col, Button, Table, Input, Icon } from 'antd';
+import { message, Row, Col, Button, Table, Input, Icon } from 'antd';
 import BookAndChapterTree from '../../components/book_and_chapter';
 import { get_coach_list } from '../../services/coach';
 import { get_teach_class } from '../../services/home';
@@ -44,7 +44,7 @@ class Coach extends React.Component {
       },
       coach_list: [],
       class_list: [],
-      stu_show: false,  // 是否展示新建弹框中班级学生列表
+      // stu_show: false,  // 是否展示新建弹框中班级学生列表
       plainOptions: [], // 选中的学生
       checked_class: [], // 选中的班级
     }
@@ -86,18 +86,11 @@ class Coach extends React.Component {
   async newCoach() {
     this.setState({checked_class: []});
     this.setState({show_add_dialog: true});
-    this.setState({stu_show: false});
+    // this.setState({stu_show: false});
     const res = await get_teach_class({bookid:this.state.bookid});
     if (res.code===200) {
       this.setState({class_list: res.data.classes});
-      console.log(res.data.classes);
-      // ClassCheckbox(res.data.classes)
     }
-  }
-
-  /** 控制是否展示具体学生名单 */
-  changeShow() {
-    this.setState({stu_show: !this.state.stu_show});
   }
 
   /** 关闭新建弹框 */
@@ -107,16 +100,41 @@ class Coach extends React.Component {
 
   /** 新建作业辅导提交 */
   submit() {
+    message.info('操作成功');
     this.setState({show_add_dialog: false});
+    this.get_coach_list();
   }
 
   /** 点击班级checkbox */
-  changebox(e) {
-    if (e.checked) {
-      const checked_class = [];
-      checked_class.push();
-    }
-    console.log(e.target);
+  change_class_check(e) {
+    let class_list = this.state.class_list;
+    class_list.forEach((item, index) => {
+      if ( e.target.value.classid === item.classid ) {
+        if (e.target.checked) {
+          item.class_all_check = true;
+          item.checked_stu_list = item.all_value_list;
+        } else {
+          item.class_all_check = false;
+          item.checked_stu_list = [];
+        }
+      }
+    });
+    this.setState({class_list: class_list})
+  }
+  /** 点击学生checkbox */
+  changeStuCheck(value, classid) {
+    let class_list = this.state.class_list;
+    class_list.forEach((item, index) => {
+      if ( classid === item.classid ) {
+        item.checked_stu_list = value;
+        if (value.length===item.all_value_list.length) {
+          item.class_all_check = true;
+        } else {
+          item.class_all_check = false;
+        }
+      }
+    });
+    this.setState({class_list: class_list})
   }
 
   /** 班级列表中加入学生 */
@@ -124,19 +142,33 @@ class Coach extends React.Component {
     // console.log(current_class, stu_list)
     let class_list = this.state.class_list;
     class_list && class_list.forEach((item, index) => {
-      console.log(item.classid, current_class.classid)
+      // console.log(item.classid, current_class.classid)
+      // class_list[index].stu_list_show = false;
       if(item.classid === current_class.classid) {
-        const options = [];
-        class_list[index].stu_list = stu_list;
-        stu_list.forEach(stu => { 
-          options.push(stu.name)
-        })
-        class_list[index].options = options;
-        console.log(class_list)
+        // 控制是否展开当前学生列表
+        class_list[index].stu_list_show = class_list[index].stu_list_show ? false : true;
+        // 如果父组件传过来stu_list，则更新class_list
+        if ( stu_list ) {
+          const options = [];
+          const all_value_list = [];
+          class_list[index].stu_list = stu_list;
+          stu_list.forEach(stu => {
+            options.push({value:stu.id, label:stu.name});
+            all_value_list.push(stu.id);
+          })
+          class_list[index].options = options;
+          class_list[index].all_value_list = all_value_list;
+          if (class_list[index].class_all_check) {
+            item.checked_stu_list = item.all_value_list;
+          } else {
+            item.checked_stu_list = [];
+          }
+        }
+        // console.log(class_list)
       }
     })
     this.setState({class_list: class_list})
-    console.log(this.state.class_list)
+    // console.log(this.state.class_list)
   }
 
   render() {
@@ -173,13 +205,13 @@ class Coach extends React.Component {
           </Col>
 
         </Row>
-        <NewCoach 
+        <NewCoach  
+          bookid={bookid}
           show_add_dialog={show_add_dialog} 
           class_list={this.state.class_list}
-          stu_show={this.state.stu_show}
           changeList={this.changeList.bind(this)}
-          changeShow={this.changeShow.bind(this)}
-          changebox={this.changebox.bind(this)}
+          change_class_check={this.change_class_check.bind(this)}
+          changeStuCheck={this.changeStuCheck.bind(this)}
           handleCancel={this.handleCancel.bind(this)}
           submit={this.submit.bind(this)}
           ></NewCoach>

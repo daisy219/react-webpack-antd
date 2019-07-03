@@ -7,15 +7,23 @@ let http = {
   get: '',
 }
 
-http.post = function(api, data) {
+http.post = function(api, data, format) {
   let _data = data;
   Object.assign(_data, {token: Token()})
   // let params = qs.stringify(_data)
-  return new Promise((resolve, rerject) => {
-    axios.post(api, qs.stringify(_data, {headers:{'Content-Type':'application/x-www-form-urlencoded'}})).then((res) => {
-      resolve(res);
+  if (format === 'form_data') {
+    return new Promise((resolve, rerject) => {
+      axios.post(api + '?token=' + Token() + '&roletype=1', qs.stringify(_data, {headers:{'Content-Type':'application/x-www-form-urlencoded'}})).then((res) => {
+        resolve(res);
+      })
     })
-  })
+  } else {
+    return new Promise((resolve, rerject) => {
+      axios.post(api + '?token=' + Token() + '&roletype=1', _data).then((res) => {
+        resolve(res);
+      })
+    })
+  }
 }
 
 http.get = function(api, data) {

@@ -45,6 +45,6 @@ export async function get_teach_class(params) {
 
 /** 获取指定班级学生 */
 export async function get_student(params) {
-    const res = await http.post(AUTH_API_ROOT + '/class/get-class-stu', {classid: params || {}});
+    const res = await http.post(AUTH_API_ROOT + '/class/get-class-stu', {classid: params || {}}, 'form_data');
     return res.data;
 }

@@ -34,6 +34,7 @@ class BaseDialog extends React.Component {
     return (
       <div>
         <Modal
+          wrapClassName={this.props.wrapClassName}
           visible={this.props.show}
           title={this.props.title}
           onOk={this.handleOk.bind(this)}
