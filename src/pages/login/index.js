@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input, Button, message } from 'antd';
 import { login_web } from '../../services/login';
-import { Token, setCookie } from '../../utils/utils';
+import { Token, setCookie } from '../../utils/utils.ts';
 
 import './index.less';
 // import imgURL from '../../assets/image/bg.jpg';

@@ -2,7 +2,7 @@
 import React from 'react';
 import locale from 'antd/lib/date-picker/locale/zh_CN';
 import { SelectFun } from '../../components/comment_com';
-import { Token, use_form_download } from '../../utils/utils';
+import { Token, use_form_download } from '../../utils/utils.ts';
 import { Select, Row, Col, Table, Button, Input, Icon, DatePicker } from 'antd';
 import { get_subject, get_report, export_report } from '../../services/home';
 import './index.less';

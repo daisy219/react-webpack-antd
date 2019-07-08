@@ -14,7 +14,7 @@ module.exports = {
     // 开发模式
     mode: 'development',
     // 配置入口文件
-    entry: './main.js',
+    entry: './main.tsx',
     // 出口文件目录为根目录下dist, 输出的文件名为main
     output: {
         path: path.resolve(__dirname, 'dist'),

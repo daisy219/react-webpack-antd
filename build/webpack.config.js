@@ -1,6 +1,10 @@
+
+const { resolve } = require('./utils');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const tsImportPluginFactory = require('ts-import-plugin');
 const browsers_list = ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 9'];
+const SRC_DIR = resolve('src');
 
 // 负责将html文档虚拟到根目录下
 let htmlWebpackPlugin = new HtmlWebpackPlugin({
@@ -14,7 +18,7 @@ module.exports = {
     // 开发模式
     // mode: 'development',
     // 配置入口文件
-    entry: './main.js',
+    entry: './main.tsx',
     // 出口文件目录为根目录下dist, 输出的文件名为main
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -34,7 +38,10 @@ module.exports = {
       historyApiFallback: true
     },
     resolve: {
-      extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+      extensions: ['.js', '.tsx', '.ts', '.tsx', '.json'],
+      alias: {
+        '@': SRC_DIR,
+      },
     },
     // 配置loader
     module: {
@@ -79,6 +86,28 @@ module.exports = {
                 },
               }, // compiles Sass to CSS
             ]
+          },
+          {
+            test: /\.(ts|tsx)$/,
+            use: [
+              {
+                loader: "babel-loader",
+              },
+              {
+                loader: "ts-loader",
+                options: {
+                  transpileOnly: true,  // 只进行编译
+                  getCustomTransformers: () => ({
+                    before: [tsImportPluginFactory({
+                      libraryDirectory: 'es',
+                      libraryName: 'antd',
+                      style: true,
+                    })]
+                  }),
+                }
+              }
+            ],
+            exclude: /node_modules/
           },
         ]
     },
