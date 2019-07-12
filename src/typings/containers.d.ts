@@ -16,9 +16,11 @@ declare namespace PROPS {
     bookname: string;
   }
 
-  // /** 课本章节组件props类型 */
-  // export interface BookAndChapterTreePropsType {
-  //   changeNode: <T extends {}>(x: number) => {};
-  //   getCurrentBook: <T extends {}>(x: number) => {};
-  // }
+  /** 选名字下拉框练习组件props类型 */
+  export interface SelectNamePropsType {
+    name_list: any[];
+    current_select: string;
+    select_name: <T extends {}>(x: string) => {};
+    changename: <T extends {}>(x: string) => {};
+  }
 }

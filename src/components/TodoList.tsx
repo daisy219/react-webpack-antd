@@ -1,21 +1,24 @@
 import React from 'react';
 import Todo from './Todo';
 
-class TodoList extends React.Component {
-  constructor(props) {
+class TodoList extends React.Component<PROPS.TodoListPropsType> {
+  constructor(props: PROPS.TodoListPropsType) {
     super(props);
   }
-  componentWillMount() {
-    // console.log(this.props)
-  }
-  render() {
+  // componentWillMount() {
+  //   // console.log(this.props)
+  // }
+  public render() {
     return (
       <ul>
         {this.props.todos && this.props.todos.map((todo, index) => (
-          <Todo key={index} {...todo} onClick={() => {this.props.toggleTodo(todo.id)}} />
+          <Todo key={index} {...todo} onClick={() => {
+            this.props.toggleTodo(todo.id);
+          }
+        } />
         ))}
       </ul>
-      )
+      );
   }
 }
 // const TodoList = ({ todos, toggleTodo }) => {
@@ -30,4 +33,4 @@ class TodoList extends React.Component {
 // }
 
 
-export default TodoList
+export default TodoList;

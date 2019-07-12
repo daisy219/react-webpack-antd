@@ -8,11 +8,7 @@ import { select_name } from '../action/index';
 // import { add_num, reduce_num } from '../action/index';
 import { SelectFun } from '../../components/comment_com';
 
-type Props = {
-  name_list: string;
-  select_name: any;
-};
-class Seletename extends React.Component<Props, {}> {
+class Seletename extends React.Component<PROPS.SelectNamePropsType, {}> {
   constructor(props: any) {
     super(props);
   }
