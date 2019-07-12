@@ -33,7 +33,7 @@ class Login extends React.Component {
   }
   async login() {
     login_web({username: this.state.userName, password: this.state.password}).then((data) => {
-      if (data.data.code===200) {
+      if (data.data.code === 200) {
         message.info('登录成功');
         this.setState({isLogin: true});
         this.props.history.replace('/teacher');

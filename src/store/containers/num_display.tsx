@@ -31,7 +31,7 @@ const NumDisplay = ({ final_num, visibilityFilter, add_num, reduce_num }) => {
       <div>
        <Button onClick={ () => {
         //  console.log(add_num(final_num))
-         add_num()
+         add_num();
         }}>加1</Button>
        <Button onClick={ () => {
          reduce_num();

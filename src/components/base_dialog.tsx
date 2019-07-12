@@ -1,36 +1,24 @@
-/**
-* 基础弹框
-*/
+/** 基础弹框 */
 import React from 'react';
 import { Modal, Button } from 'antd';
 
-class BaseDialog extends React.Component {
-  constructor(props) {
+class BaseDialog extends React.Component<PROPS.BaseDialogPropsType, {}> {
+  constructor(props: PROPS.BaseDialogPropsType) {
     super(props);
-    this.state = {
-    };
   }
-  showModal() {
+  // private showModal() {
+  // }
+
+  private handleOk() {
+    this.props.handleOk();
   }
 
-  handleOk () {
-    this.props.handleOk()
-  }
-
-  handleCancel () {
+  private handleCancel() {
     this.props.handleCancel();
-  }
-  componentWillMount() {
-    
-  }
-  componentWillUpdate() {
-  }
-  componentWillReceiveProps() {
-
   }
 // METHODS
 
-  render(){
+  public render() {
     return (
       <div>
         <Modal
@@ -40,8 +28,8 @@ class BaseDialog extends React.Component {
           onOk={this.handleOk.bind(this)}
           onCancel={this.handleCancel.bind(this)}
           footer={[
-            <Button key="back" onClick={this.handleCancel.bind(this)}>取消</Button>,
-            <Button key="submit" type="primary" onClick={this.handleOk.bind(this)}>
+            <Button key='back' onClick={this.handleCancel.bind(this)}>取消</Button>,
+            <Button key='submit' type='primary' onClick={this.handleOk.bind(this)}>
               确定
             </Button>,
           ]}
@@ -51,4 +39,4 @@ class BaseDialog extends React.Component {
     );
   }
 }
-export default BaseDialog
+export default BaseDialog;

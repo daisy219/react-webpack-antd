@@ -1,28 +1,32 @@
 import React from 'react';
 
-import { connect } from 'react-redux'
-import { select_name } from '../action/index'
-import Wrong from '../../pages/wrong/index'
-import TodoList from '../../components/TodoList'
-import { Button } from 'antd';
-import { add_num, reduce_num } from '../action/index'
+import { connect } from 'react-redux';
+import { select_name } from '../action/index';
+// import Wrong from '../../pages/wrong/index';
+// import TodoList from '../../components/TodoList';
+// import { Button } from 'antd';
+// import { add_num, reduce_num } from '../action/index';
 import { SelectFun } from '../../components/comment_com';
 
-class Seletename extends React.Component {
-  constructor(props) {
+type Props = {
+  name_list: string;
+  select_name: any;
+};
+class Seletename extends React.Component<Props, {}> {
+  constructor(props: any) {
     super(props);
   }
-  componentWillMount() {
+  public componentWillMount() {
     this.props.select_name(this.props.name_list[0].value);
     this.props.changename(this.props.name_list[0].value);
   }
-  changeName(value) {
+  private changeName(value: string) {
     // console.log(value);
     this.props.select_name(value);
     this.props.changename(value);
   }
   // console.log(add_num)
-  render() {
+  public render() {
     // console.log(this.props)
     return (
       <div>{this.props.current_select}
@@ -37,20 +41,20 @@ class Seletename extends React.Component {
         <SelectFun list={this.props.name_list} label={'label'} value={'value'}
         handleChange={this.changeName.bind(this)}/>
       </div>
-    )
+    );
   }
 }
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
   current_select: state.select_name,
   // final_num: state.change_num,
-})
+});
 
-const mapDispatchToProps = dispatch => ({
-  select_name: value => dispatch(select_name(value))
+const mapDispatchToProps = (dispatch: any) => ({
+  select_name: (value: string) => dispatch(select_name(value)),
   // add_num,reduce_num
-})
+});
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
-)(Seletename)
+  mapDispatchToProps,
+)(Seletename);

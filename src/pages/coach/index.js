@@ -1,7 +1,7 @@
 import React from 'react';
 import './index.less';
 import { message, Row, Col, Button, Table, Input, Icon } from 'antd';
-import BookAndChapterTree from '../../components/book_and_chapter';
+import BookAndChapterTree from '../../components/book_and_chapter.tsx';
 import { get_coach_list } from '../../services/coach';
 import { get_teach_class } from '../../services/home';
 import NewCoach from './_part/new_coach';

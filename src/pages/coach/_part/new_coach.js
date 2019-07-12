@@ -5,7 +5,7 @@ import React from 'react';
 import './new_coach.less';
 import locale from 'antd/lib/date-picker/locale/zh_CN';
 import { Row, Col, Input, DatePicker } from 'antd';
-import BaseDialog from '../../../components/base_dialog';
+import BaseDialog from '../../../components/base_dialog.tsx';
 import ClassCheckbox from './class_check';
 import { new_coach } from '../../../services/coach';
 class NewCoach extends React.Component {

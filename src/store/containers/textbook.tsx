@@ -1,6 +1,4 @@
-/**
-* 存储课本章节树信息容器组件
-*/
+/** 存储课本章节树信息容器组件 */
 import React from 'react';
 import { Cascader, Tree } from 'antd';
 import { connect } from 'react-redux';
@@ -8,17 +6,17 @@ import { choose_textbook, save_book_list, change_chapter_tree } from '../action/
 import { get_onebook, get_textbooks, get_child_node } from '../../services/home';
 const { TreeNode } = Tree;
 
-class ChooseTextbook extends React.Component {
-  constructor(props) {
+class ChooseTextbook extends React.Component<PROPS.TextbookPropsType> {
+  constructor(props: any) {
     super(props);
     this.state = {
       current_book: '', // 当前课本名
       book_list: [], // 可选课本列表
       current_node: [], // 当前选择的章节
       tree_data: [], // 章节树数据
-    }
+    };
   }
-  componentWillMount() {
+  public componentWillMount() {
     // redux中没有章节树数据时，采用当前获取的章节树数据
     this.setState({tree_data: this.props.chapter_tree ? this.props.chapter_tree : this.state.tree_data});
     // redux中没有存储课本信息时，再去获取课本信息
@@ -29,43 +27,55 @@ class ChooseTextbook extends React.Component {
     }
   }
   /** 改变课本 */
-  async changebook(value) {
+  private async changebook(value: any) {
     await this.get_onebook(value[4]);
   }
 
   /** 获取默认课本及课本列表 */
-  async get_textbooks () {
-    const res = await get_textbooks({source: 1, termid: window.localStorage.getItem("termid")});
-      if (res.code===200) {
-          let book_list = [];
-          book_list = res.data.stageData.reduce((pre, cur) => {
-            pre.push({label: cur.stage, value: cur.stageid, children: cur.subjectList});
+  private async get_textbooks() {
+    const res = await get_textbooks({source: 1, termid: window.localStorage.getItem('termid')});
+    if (res.code === 200) {
+      let book_list = [];
+      book_list = res.data.stageData.reduce((pre, cur) => {
+        pre.push({label: cur.stage, value: cur.stageid, children: cur.subjectList});
+        return pre;
+      }, [] );
+      if (!book_list) {
+        return;
+      }
+      book_list.forEach((item: any) => {
+        item.children = item.children.reduce((pre: any, cur: any) => {
+          pre.push({label: cur.subject, value: cur.subjectid, children: cur.gradeList});
+          return pre;
+        }, []);
+        if (!item.children) {
+          return;
+        }
+        item.children.forEach((it: any) => {
+          it.children = it.children.reduce((pre: any, cur: any) => {
+            pre.push({label: cur.gradename, value: cur.gradeid, children: cur.items});
             return pre;
-          }, [] )
-          book_list && book_list.forEach(item => {
-            item.children = item.children.reduce((pre, cur) => {
-              pre.push({label: cur.subject, value: cur.subjectid, children: cur.gradeList});
+          }, []);
+          if (!it.children) {
+            return;
+          }
+          it.children.forEach((publish: any) => {
+            publish.children = publish.children.reduce((pre, cur) => {
+              pre.push({label: cur.name, value: cur.itemid, children: cur.bookList});
               return pre;
-            }, [])
-            item.children && item.children.forEach(it => {
-              it.children = it.children.reduce((pre, cur) => {
-                pre.push({label: cur.gradename, value: cur.gradeid, children: cur.items});
+            }, []);
+            if (!publish.children) {
+              return;
+            }
+            publish.children.forEach((book: any) => {
+              book.children = book.children.reduce((pre, cur) => {
+                pre.push({label: cur.tbname, value: cur.bookid});
                 return pre;
-              }, [])
-              it.children && it.children.forEach(publish => {
-                publish.children = publish.children.reduce((pre, cur) => {
-                  pre.push({label: cur.name, value: cur.itemid, children: cur.bookList});
-                  return pre;
-                }, [])
-                publish.children && publish.children.forEach(book => {
-                  book.children = book.children.reduce((pre, cur) => {
-                    pre.push({label: cur.tbname, value: cur.bookid});
-                    return pre;
-                  }, [])
-                })
-              })
-            })
-          })
+              }, []);
+            });
+          });
+        });
+      });
       await this.setState({book_list: book_list});
       this.props.redux_book_list(book_list);
       this.get_onebook(res.data.bookData.bookid);
@@ -73,9 +83,9 @@ class ChooseTextbook extends React.Component {
   }
 
   /** 获取并存储当前选择的课本信息 */
-  async get_onebook(bookid) {
+  private async get_onebook(bookid) {
     const res = await get_onebook({bookid: bookid});
-    if (res.code===200) {
+    if (res.code === 200) {
       this.setState({current_book: res.data.tbname});
       const bookinfo = {
         bookname: res.data.tbname,
@@ -89,8 +99,8 @@ class ChooseTextbook extends React.Component {
   }
 
   /** 获取章节节点 */
-  async get_child_node(id, type) {
-    let res = ''
+  private async get_child_node(id, type) {
+    let res = '';
     if (type === 'chapter') {
       res = await get_child_node({bookid: id});
     } else {
@@ -102,7 +112,7 @@ class ChooseTextbook extends React.Component {
       let tree_data = [];
       node_list.forEach((item) => {
         tree_data.push({title: item.nodename, key: item.nodecode, other_data: item});
-      })
+      });
       await this.setState({current_node: tree_data});
       this.props.redux_chapter_tree(tree_data);
     }
