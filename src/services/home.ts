@@ -14,7 +14,7 @@ export async function get_onebook(params: EDU.OnlyBookParamsType) {
 }
 
 /** 获取当前选择章节节点 */
-export async function get_child_node(params: EDU.OnlyBookParamsType) {
+export async function get_child_node(params: EDU.GetChildNodeParamsType) {
     const res = await http_get({api: AUTH_API_ROOT + '/resourcenode/get-child-node', params: {params}});
     return res.data;
 }

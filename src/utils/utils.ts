@@ -10,13 +10,15 @@ export function setCookie(name: string, value: string) {
  * 读取Token
  */
 export function Token() {
-    const arr: any = [];
-    const reg = new RegExp('(^| )platform_token=([^;]*)(;|$)'); // 正则匹配
-    if ( arr === document.cookie.match(reg) ) {
-      return unescape(arr[2]);
-    } else {
-      return null;
-    }
+  const token  = window.localStorage.getItem('platform_token');
+  return token;
+    // const arr: any = [];
+    // const reg = new RegExp('(^| )platform_token=([^;]*)(;|$)'); // 正则匹配
+    // if ( arr === document.cookie.match(reg) ) {
+    //   return unescape(arr[2]);
+    // } else {
+    //   return null;
+    // }
 }
 
 /**

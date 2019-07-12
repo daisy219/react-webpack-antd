@@ -10,6 +10,8 @@ declare namespace PROPS {
 
   /** 课本章节组件props类型 */
   export interface BookAndChapterTreePropsType {
+    bookid: number;
+    nodeid: number;
     changeNode: <T extends {}>(x: number) => {};
     getCurrentBook: <T extends {}>(x: number) => {};
   }

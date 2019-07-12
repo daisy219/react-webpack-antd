@@ -33,7 +33,7 @@ export const reduce_num = () => ({
   // num: num - 1,
 });
 // 课本信息
-export const choose_textbook = (bookinfo: any) => ({
+export const choose_textbook = (bookinfo: PROPS.CurrentBookinfoType) => ({
   type: 'CHOOES_TEXTBOOK',
   bookinfo: {bookinfo},
 });

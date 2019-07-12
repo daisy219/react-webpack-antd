@@ -4,4 +4,13 @@ declare namespace EDU {
       value: number;
       label: string;
     }
+    export interface NodeDataType {
+      title: string;
+      key: number;
+      other_data: any;
+    }
+    export interface StudentList {
+      name: string;
+      id: number;
+    }
 }

@@ -33,7 +33,8 @@ class BaseDialog extends React.Component<PROPS.BaseDialogPropsType, {}> {
               确定
             </Button>,
           ]}
-        >{this.props.children}
+        >
+        {this.props.children}
         </Modal>
       </div>
     );

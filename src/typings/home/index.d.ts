@@ -12,6 +12,10 @@ declare namespace EDU {
   export interface OnlyBookParamsType {
     bookid: number;
   }
+  export interface GetChildNodeParamsType {
+    bookid?: number;
+    nodeid?: number
+  }
   /** 获取首页表格的参数类型 */
   export interface GetHomeReportParamsType {
     orderby: number;
