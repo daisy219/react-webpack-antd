@@ -17,17 +17,17 @@ declare namespace PROPS {
   export interface BookAndChapterTreePropsType {
     bookid: number;
     nodeid: number;
-    changeNode: <T extends {}>(x: number) => {};
-    getCurrentBook: <T extends {}>(x: number) => {};
+    changeNode: <T extends {}>(x: number) => void;
+    getCurrentBook: <T extends {}>(x: number) => void;
   }
 
   /** 下拉框组件props类型 */
   export interface SelectFunPropsType {
     list: EDU.SelectValueType[];
-    value: number;
+    value: number | string;
     label: string;
     need_all: boolean;
-    handleChange: <T extends {}>() => {};
+    handleChange: (value: string | number) => void;
   }
 
   /** TodoListprops类型 */

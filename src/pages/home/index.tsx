@@ -8,7 +8,7 @@ import { get_subject, get_report, export_report } from '@/services/home';
 import './index.less';
 
 const Search = Input.Search;
-const {RangePicker} = DatePicker;
+const { RangePicker } = DatePicker;
 
 const report_columns = [
   {title: '姓名', dataIndex: 'username', key: 'username'},

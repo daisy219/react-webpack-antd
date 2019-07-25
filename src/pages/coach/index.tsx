@@ -204,7 +204,7 @@ class Coach extends React.Component<any, CoachStateType> {
           </Col>
           <Col span={18}>
             <div className='coach_model_content'>
-              <div className='btn_group'>
+              <div className='common_btn_group'>
                 <Button type='primary' onClick={this.newCoach.bind(this)}>新建</Button>
                 <Button type='primary' onClick={this.newCoach.bind(this)}>导出</Button>
                 <Button type='danger' onClick={this.newCoach.bind(this)}>删除</Button>
