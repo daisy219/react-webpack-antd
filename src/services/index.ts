@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
-import { Token } from '../utils/utils';
+import { Token } from '@/utils/utils';
 
 
 export function http_post(config: EDU.PostConfigType): Promise<any> {

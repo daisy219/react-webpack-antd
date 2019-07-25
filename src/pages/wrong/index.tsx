@@ -2,12 +2,12 @@ import React from 'react';
 
 import { Row, Col } from 'antd';
 
-import Footer from '../../components/Footer';
-import AddTodo from '../../store/containers/AddTodo';
-import VisibleTodoList from '../../store/containers/VisibleTodoList';
-import NumDisplay from '../../store/containers/num_display'; // redux练习
-import BookAndChapterTree from '../../components/book_and_chapter.tsx';
-import SeleteName from '../../store/containers/selete_name';
+import Footer from '@/components/Footer';
+import AddTodo from '@/store/containers/AddTodo';
+import VisibleTodoList from '@/store/containers/VisibleTodoList';
+import NumDisplay from '@/store/containers/num_display'; // redux练习
+import BookAndChapterTree from '@/components/book_and_chapter';
+import SeleteName from '@/store/containers/selete_name';
 
 interface WrongStateType {
   bookid: number | null;

@@ -5,7 +5,7 @@ import React from 'react';
 // import { Cascader, Row, Col, Tree  } from 'antd';
 // import { get_textbooks, get_onebook, get_child_node } from '../services/home';
 import './style/choose_textbook.less';
-import ChooseTextbook from '../store/containers/textbook';
+import ChooseTextbook from '@/store/containers/textbook';
 class BookAndChapterTree extends React.Component<PROPS.BookAndChapterTreePropsType, {}> {
   constructor(props: PROPS.BookAndChapterTreePropsType) {
     super(props);

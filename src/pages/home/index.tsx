@@ -1,10 +1,10 @@
 /** 主页 */
 import React from 'react';
 import locale from 'antd/lib/date-picker/locale/zh_CN';
-import { SelectFun } from '../../components/comment_com';
-import { Token, use_form_download } from '../../utils/utils';
+import { SelectFun } from '@/components/comment_com';
+import { Token, use_form_download } from '@/utils/utils';
 import { Row, Col, Table, Button, Input, DatePicker } from 'antd';
-import { get_subject, get_report, export_report } from '../../services/home';
+import { get_subject, get_report, export_report } from '@/services/home';
 import './index.less';
 
 const Search = Input.Search;
@@ -154,7 +154,7 @@ class Home extends React.Component<any, HomeStateType> {
               </div>
             </Col>
           </Row>
-          {/* <img src={require('../../assets/image/bg.jpg')}></img> */}
+          {/* <img src={require('@/assets/image/bg.jpg')}></img> */}
           <Table
             locale={report_locale}
             columns={report_columns}

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Input, Button, message } from 'antd';
-import { login_web } from '../../services/login';
-import { Token, setCookie } from '../../utils/utils';
+import { login_web } from '@/services/login';
+import { Token, setCookie } from '@/utils/utils';
 
 import './index.less';
-// import imgURL from '../../assets/image/bg.jpg';
+// import imgURL from '@/assets/image/bg.jpg';
 interface LoginStateType {
   userName: string;
   password: string;

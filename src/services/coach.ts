@@ -1,4 +1,4 @@
-import { COACH_API_ROOT } from '../api_root/main';
+import { COACH_API_ROOT } from '@/api_root/main';
 import { http_get, http_post } from './index';
 
 /** 获取作业辅导列表 */

@@ -1,4 +1,4 @@
-import { AUTH_API_ROOT, HOMEWORK_API_ROOT } from '../api_root/main';
+import { AUTH_API_ROOT, HOMEWORK_API_ROOT } from '@/api_root/main';
 import { http_get, http_post } from './index';
 
 /** 获取课本 */

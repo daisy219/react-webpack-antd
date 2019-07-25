@@ -1,9 +1,9 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Home from '../pages/home/index.tsx';
-import Coach from '../pages/coach/index.tsx';
-import Worry from '../pages/wrong/index.tsx';
-import Work from '../pages/work/index.tsx';
+import Home from '@/pages/home/index';
+import Coach from '@/pages/coach/index';
+import Worry from '@/pages/wrong/index';
+import Work from '@/pages/work/index';
 // import MainMenu from '../components/menu';
 
 const MainRouter = () => (

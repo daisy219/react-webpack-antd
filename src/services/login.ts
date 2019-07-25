@@ -1,4 +1,4 @@
-import { AUTH_API_ROOT } from '../api_root/main';
+import { AUTH_API_ROOT } from '@/api_root/main';
 import { http_get } from './index';
 
 export function login_web(params: EDU.LoginType): Promise<EDU.AjaxResponseType> {

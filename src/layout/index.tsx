@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import { Link } from 'react-router-dom';
 import './index.less';
-import MainRouter from '../router/teacher';
+import MainRouter from '@/router/teacher';
 
 const { Header, Content, Footer } = Layout;
 class LayoutModel extends React.Component {

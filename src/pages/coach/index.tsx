@@ -1,9 +1,9 @@
 import React from 'react';
 import './index.less';
 import { message, Row, Col, Button, Table } from 'antd';
-import BookAndChapterTree from '../../components/book_and_chapter';
-import { get_coach_list } from '../../services/coach';
-import { get_teach_class } from '../../services/home';
+import BookAndChapterTree from '@/components/book_and_chapter';
+import { get_coach_list } from '@/services/coach';
+import { get_teach_class } from '@/services/home';
 import NewCoach from './_part/new_coach';
 
 interface CoachStateType {
