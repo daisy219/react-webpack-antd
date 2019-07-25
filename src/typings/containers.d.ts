@@ -1,7 +1,7 @@
 declare namespace PROPS {
   /** 课本容器组件props类型 */
   export interface TextbookPropsType {
-    textbook_list: any;
+    textbook_list: PROPS.BookListPropsType[];
     chapter_tree: [];
     current_bookinfo: PROPS.CurrentBookinfoType,
     // title: string;

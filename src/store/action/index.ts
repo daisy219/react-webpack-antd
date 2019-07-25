@@ -35,7 +35,7 @@ export const reduce_num = () => ({
 // 课本信息
 export const choose_textbook = (bookinfo: PROPS.CurrentBookinfoType) => ({
   type: 'CHOOES_TEXTBOOK',
-  bookinfo: {bookinfo},
+  bookinfo: (bookinfo),
 });
 
 export const select_name = (value: string) => ({
@@ -47,12 +47,12 @@ export const select_name = (value: string) => ({
 export const change_chapter_tree = (value: string) => ({
   type: 'CHAPTER_TREE',
   // name: current.name,
-  value: {value},
+  value: (value),
 });
 
 // 课本列表
-export const save_book_list = (value: string) => ({
+export const save_book_list = (value: PROPS.BookListPropsType[]) => ({
   type: 'BOOK_LIST',
   // name: current.name,
-  value: {value},
+  value: (value),
 });

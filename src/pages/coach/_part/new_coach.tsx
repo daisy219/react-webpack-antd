@@ -13,8 +13,8 @@ interface NewCoachStateType {
     shared: number;
     name: string;
     stime: string;
-    publishClass: any[];
-  }
+    publishClass?: any[];
+  };
 }
 class NewCoach extends React.Component<PROPS.NewCoachPropsType, NewCoachStateType> {
   constructor(props: PROPS.NewCoachPropsType) {
@@ -31,7 +31,7 @@ class NewCoach extends React.Component<PROPS.NewCoachPropsType, NewCoachStateTyp
   // this.method = this.method.bind(this);
   }
 
-  private change_start_date(date, dateString) {
+  private change_start_date(date: any, dateString: string) {
     const params = {
       bookid: this.props.bookid,
       name: this.state.params.name,
@@ -47,7 +47,7 @@ class NewCoach extends React.Component<PROPS.NewCoachPropsType, NewCoachStateTyp
       name: event.target.value,
       shared: this.state.params.shared,
       stime: this.state.params.stime,
-    }
+    };
     this.setState({params});
   }
   private async submit() {

@@ -8,7 +8,7 @@ import { select_name } from '../action/index';
 // import { add_num, reduce_num } from '../action/index';
 import { SelectFun } from '../../components/comment_com';
 
-class Seletename extends React.Component<PROPS.SelectNamePropsType, {}> {
+class Seletename extends React.Component<any, {}> {
   constructor(props: any) {
     super(props);
   }
@@ -25,7 +25,8 @@ class Seletename extends React.Component<PROPS.SelectNamePropsType, {}> {
   public render() {
     // console.log(this.props)
     return (
-      <div>{this.props.current_select}
+      <div>
+      {/* {this.props.current_select} */}
         {/* <Button onClick={ () => {
         //  console.log(add_num(final_num))
         this.props.add_num()

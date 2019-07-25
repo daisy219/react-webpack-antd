@@ -9,8 +9,8 @@ interface MainMenuStateType {
     current: string;
 }
 
-class MainMenu extends React.Component<PROPS.MenuPropsType, MainMenuStateType> {
-    constructor(props: PROPS.MenuPropsType) {
+class MainMenu extends React.Component<any, MainMenuStateType> {
+    constructor(props: any) {
         super(props);
         this.state = {
             current: 'home',

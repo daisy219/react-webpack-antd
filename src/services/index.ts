@@ -25,8 +25,16 @@ export function http_post(config: EDU.PostConfigType): Promise<any> {
 
 
 export function http_get(config: EDU.GetConfigType): Promise<any> {
-  const _data: any = config.params;
-  Object.assign(_data.params, {token: Token(), roletype: 1});
+  let _data: any = null;
+  if (config.params) {
+    _data = config.params;
+    Object.assign(_data.params, {token: Token(), roletype: 1});
+  } else {
+    _data = {
+      token: Token(),
+      roletype: 1,
+    };
+  }
   return new Promise((resolve, reject) => {
     axios.get(config.api, _data).then((res) => {
       // console.table(data)

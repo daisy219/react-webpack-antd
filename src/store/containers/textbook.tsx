@@ -1,6 +1,6 @@
 /** 存储课本章节树信息容器组件 */
 import React from 'react';
-import { Cascader, Tree } from 'antd';
+import { Tree, Cascader } from 'antd';
 import { connect } from 'react-redux';
 import { choose_textbook, save_book_list, change_chapter_tree } from '../action/index';
 import { get_onebook, get_textbooks, get_child_node } from '../../services/home';
@@ -8,12 +8,12 @@ import { get_onebook, get_textbooks, get_child_node } from '../../services/home'
 const { TreeNode } = Tree;
 interface TextbookStateType {
   current_book: string;
-  book_list: any[];
+  book_list: PROPS.BookListPropsType[];
   current_node: EDU.NodeDataType[];
   tree_data: any;
 }
 class ChooseTextbook extends React.Component<PROPS.TextbookPropsType, TextbookStateType> {
-  constructor(props: any) {
+  constructor(props: PROPS.TextbookPropsType) {
     super(props);
     this.state = {
       current_book: '', // 当前课本名
@@ -32,10 +32,10 @@ class ChooseTextbook extends React.Component<PROPS.TextbookPropsType, TextbookSt
       this.props.getCurrentBook(this.props.current_bookinfo.bookid); // 输出到大模块组件当前课本
     }
   }
-  // /** 改变课本 */
-  // private async changebook(value: any) {
-  //   await this.get_onebook(value[4]);
-  // }
+  /** 改变课本 */
+  private async changebook(value: any) {
+    await this.get_onebook(value[4]);
+  }
 
   /** 获取默认课本及课本列表 */
   private async get_textbooks() {
@@ -49,6 +49,7 @@ class ChooseTextbook extends React.Component<PROPS.TextbookPropsType, TextbookSt
       if (!book_list) {
         return;
       }
+      // console.log(book_list);
       book_list.forEach((item: any) => {
         item.children = item.children.reduce((pre: any, cur: any) => {
           pre.push({label: cur.subject, value: cur.subjectid, children: cur.gradeList});
@@ -84,7 +85,7 @@ class ChooseTextbook extends React.Component<PROPS.TextbookPropsType, TextbookSt
       });
       await this.setState({book_list});
       this.props.redux_book_list(book_list);
-      this.get_onebook(res.data.bookData.bookid);
+      // this.get_onebook(res.data.bookData.bookid);
     }
   }
 
@@ -164,22 +165,21 @@ class ChooseTextbook extends React.Component<PROPS.TextbookPropsType, TextbookSt
     return <TreeNode {...item} dataRef={item} />;
   })
 public render() {
-  // console.log(this.props);
-   return (
-     <div>
-        <p>当前课本：{this.props.current_bookinfo.bookname ? this.props.current_bookinfo.bookname : this.state.current_book}</p>
-        {/* <Cascader className='choosebook'
-          options={this.props.textbook_list}
-          onChange={this.changebook.bind(this)}
-          placeholder='更换课本' /> */}
-          <Tree loadData={this.onLoadData}
-            showLine={true}
-            onSelect={this.onSelect.bind(this)}
-            >
-            {/* {this.renderTreeNodes(this.props.chapter_tree ? this.props.chapter_tree : this.state.tree_data)} */}
-          </Tree>
-     </div>
-   );
+  return (
+    <div>
+      <p>当前课本：{this.props.current_bookinfo.bookname ? this.props.current_bookinfo.bookname : this.state.current_book}</p>
+      <Cascader className='choosebook'
+        options={this.props.textbook_list}
+        onChange={this.changebook.bind(this)}
+        placeholder='更换课本' />
+        <Tree loadData={this.onLoadData}
+          showLine={true}
+          onSelect={this.onSelect.bind(this)}
+          >
+          {this.renderTreeNodes(this.props.chapter_tree ? this.props.chapter_tree : this.state.tree_data)}
+        </Tree>
+    </div>
+  );
   }
 }
 
@@ -191,7 +191,7 @@ const mapStateToProps = (state: any) => ({
 
 const mapDispatchToProps = (dispatch: any) => ({
   redux_select_book: (info: PROPS.CurrentBookinfoType) => dispatch(choose_textbook(info)),
-  redux_book_list: (list: string) => dispatch(save_book_list(list)),
+  redux_book_list: (list: PROPS.BookListPropsType[]) => dispatch(save_book_list(list)),
   redux_chapter_tree: (list: string) => dispatch(change_chapter_tree(list)),
 });
 

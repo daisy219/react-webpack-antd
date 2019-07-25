@@ -7,7 +7,12 @@ declare namespace PROPS {
     handleOk: <T extends {}>() => {};
     handleCancel: <T extends {}>() => {};
   }
-
+  /** 选择课本组件props类型 */
+  export interface BookListPropsType {
+    label: string;
+    value: string | undefined;
+    children?: PROPS.BookListPropsType[];
+  }
   /** 课本章节组件props类型 */
   export interface BookAndChapterTreePropsType {
     bookid: number;
@@ -54,11 +59,16 @@ declare namespace PROPS {
   export interface NewCoachPropsType {
     class_list: any[];
     bookid: number;
-    changeList: any[];
+    changeList: <T extends {}>(x: any, y?: any) => {};
     show_add_dialog: boolean;
     submit: <T extends {}>() => {};
     handleCancel: <T extends {}>() => {};
     changeStuCheck: <T extends {}>() => {};
     change_class_check: <T extends {}>() => {};
+  }
+
+  /** 导航组件props类型 */
+  export interface MenuPropsType {
+
   }
 }

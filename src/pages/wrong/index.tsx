@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Checkbox, Row, Col, Button, Table, Input, Icon, Select } from 'antd';
+import { Row, Col } from 'antd';
 
 import Footer from '../../components/Footer';
 import AddTodo from '../../store/containers/AddTodo';
@@ -9,52 +9,58 @@ import NumDisplay from '../../store/containers/num_display'; // redux练习
 import BookAndChapterTree from '../../components/book_and_chapter.tsx';
 import SeleteName from '../../store/containers/selete_name';
 
+interface WrongStateType {
+  bookid: number | null;
+  nodeid: number | null;
+  current_select: string;
+  name_list: EDU.SelectValueType[];
+}
 
-class Wrong extends React.Component {
-  constructor(props) {
+class Wrong extends React.Component<any, WrongStateType> {
+  constructor(props: any) {
     super(props);
     this.state = {
-      bookid: '',
-      nodeid: '',
+      bookid: null,
+      nodeid: null,
       current_select: '',
       name_list: [
         {label: 'Jack', value: 'jack'},
         {label: 'Lucy', value: 'lucy'},
         {label: 'Yiminghe', value: 'yiminghe'},
-      ]
-    }
+      ],
+    };
   }
-  componentWillMount() {
+  public componentWillMount() {
   }
-  async changeTextbook(value) {
+  private async changeTextbook(value: number[]) {
     // console.log(value)
     await this.setState({bookid: value[4]});
     // await this.setState({params: {...this.state.params}});
   }
-  async changeNode(nodeid) {
-    await this.setState({nodeid: nodeid});
+  private async changeNode(nodeid: number) {
+    await this.setState({nodeid});
     // await this.setState({params: {...this.state.params, nodecode: nodeid[0]}})
 
   }
-  async getCurrentBook(bookId) {
+  private async getCurrentBook(bookId: number) {
     await this.setState({bookid: bookId});
   }
-  changeName(value) {
+  private changeName(value: string) {
     this.setState({current_select: value});
     // this.setState({current_value: })
     // console.log(this.props)
     // this.props.selete_name(value);
     // const current_name = {
-    //   name: 
+    //   name:
     // }
     // this.props.
   }
-  render() {
+  public render() {
     const bookid = this.state.bookid;
     const nodeid = this.state.nodeid;
 
     return (
-      <div className="wrong_model">
+      <div className='wrong_model'>
         <Row>
           <Col span={6}>
             <BookAndChapterTree
@@ -75,8 +81,9 @@ class Wrong extends React.Component {
           </Col>
         </Row>
       </div>
-    )
+    );
   }
 }
 
-export default Wrong
+export default Wrong;
+

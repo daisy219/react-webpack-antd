@@ -1,15 +1,21 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const Link = ({ active, children, onClick }) => (
+interface LinkPropsType {
+  onClick: <T extends {}>() => {};
+  active: any;
+  children: any;
+}
+
+const Link: React.FunctionComponent<LinkPropsType>  = (props) => (
   <button
-    onClick={onClick}
-    disabled={active}
+    onClick={props.onClick}
+    disabled={props.active}
     style={{
       marginLeft: '4px',
     }}
   >
-    {children}
+    {props.children}
   </button>
 );
 

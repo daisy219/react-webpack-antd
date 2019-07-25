@@ -1,10 +1,19 @@
 import React from 'react';
 import { Layout, Menu, Breadcrumb } from 'antd';
-import MainRouter from '../router/teacher';
 import { Link } from 'react-router-dom';
+import './index.less';
+import MainRouter from '../router/teacher';
 
 const { Header, Content, Footer } = Layout;
 class LayoutModel extends React.Component {
+    private logout() {
+        let storage = null;
+        if (window.localStorage) {              // 判断浏览器是否支持localStorage
+            storage = window.localStorage;
+            storage.removeItem('platform_token');     // 调用removeItem方法，移除数据
+        }
+        this.props.history.push('/');
+    }
     public render() {
         return (
             <Layout className='layout'>
@@ -29,6 +38,7 @@ class LayoutModel extends React.Component {
                             <Link to='/teacher/work'>作业</Link>
                         </Menu.Item>
                     </Menu>
+                    <div className='logout' onClick={this.logout.bind(this)}>退出</div>
                 </Header>
                 <Content style={{ padding: '0 50px' }}>
                     <Breadcrumb style={{ margin: '16px 0' }}>
