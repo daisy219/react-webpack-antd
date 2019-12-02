@@ -6,7 +6,7 @@ import { select_name } from '../action/index';
 // import TodoList from '../../components/TodoList';
 // import { Button } from 'antd';
 // import { add_num, reduce_num } from '../action/index';
-import { SelectFun } from '../../components/comment_com';
+import { SelectFun } from '../../components/drop_select';
 
 class Seletename extends React.Component<any, {}> {
   constructor(props: any) {

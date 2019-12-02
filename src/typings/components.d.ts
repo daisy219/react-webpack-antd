@@ -23,7 +23,7 @@ declare namespace PROPS {
 
   /** 下拉框组件props类型 */
   export interface SelectFunPropsType {
-    list: EDU.SelectValueType[];
+    list: COMMON.SelectValueType[];
     value: number | string;
     label: string;
     need_all: boolean;

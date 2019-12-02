@@ -9,7 +9,7 @@ export function http_post(config: EDU.PostConfigType): Promise<any> {
   // let params = qs.stringify(_data)
   if (config.format === 'form_data') {
     return new Promise((resolve, rerject) => {
-      axios.post(config.api + '?token=' + Token() + '&roletype=1',
+      axios.post(config.api,
       (qs as any).stringify(_data, { headers: {'Content-Type': 'application/x-www-form-urlencoded'} })).then((res) => {
         resolve(res);
       });

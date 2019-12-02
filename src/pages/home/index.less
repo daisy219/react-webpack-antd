@@ -1,13 +1,42 @@
 @import '../../assets/var.less';
 
 .home_model{
-  .ant-cascader-picker{
-    width: 500px;
-  }
-  .home_model_top{
-    margin-bottom: 20px;
-    .search{
-      width: 250px;
+  .welcome_text {
+    text-align: center;
+    line-height: 100px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #F9D23A;
+    position: relative;
+    .cloud_left {
+      position: absolute;
+      top: 0;
+      left: 300px;
+      animation: cloud_left 4s infinite;
+      -moz-animation: cloud_left 4s infinite;	/* Firefox */
+      -webkit-animation: cloud_left 4s infinite;	/* Safari 和 Chrome */
+      -o-animation: cloud_left 4s infinite;	/* Opera */
     }
+    .cloud_right {
+      position: absolute;
+      top: 0;
+      right: 300px;
+      animation: cloud_left 4s infinite;
+      -moz-animation: cloud_left 4s infinite;	/* Firefox */
+      -webkit-animation: cloud_left 4s infinite;	/* Safari 和 Chrome */
+      -o-animation: cloud_left 4s infinite;	/* Opera */ 
+    }
+  }
+}
+@keyframes cloud_left
+{
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
   }
 }

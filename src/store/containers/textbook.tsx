@@ -165,6 +165,7 @@ class ChooseTextbook extends React.Component<PROPS.TextbookPropsType, TextbookSt
     return <TreeNode {...item} dataRef={item} />;
   })
 public render() {
+  console.log(this.props);
   return (
     <div>
       <p>当前课本：{this.props.current_bookinfo.bookname ? this.props.current_bookinfo.bookname : this.state.current_book}</p>

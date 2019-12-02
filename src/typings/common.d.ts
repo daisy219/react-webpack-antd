@@ -1,4 +1,4 @@
-declare namespace EDU {
+declare namespace COMMON {
     // 下拉框基础类型
     export interface SelectValueType {
       value: number | string;

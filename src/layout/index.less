@@ -1,11 +1,33 @@
 @import '~@/assets/var.less';
-.ant-layout-header{
-  .ant-menu {
-    float: left;
+.main_layout {
+  .main_header {
+    height: 80px;
+    background:linear-gradient(0deg,rgba(240,240,240,1) 0%,rgba(255,255,255,1) 100%);
+    padding: 0 20px;
+    // background-color: #FEE4DE;
+    .menu_item {
+      float: left;
+      padding: 0 20px;
+      line-height: 80px;
+      a {
+        color: @main_color;
+        font-size: 20px;
+        font-weight: bold;
+      }
+    }
   }
-  .logout {
-    float: right;
-    cursor: pointer;
-    color: @white_color;
+  .main_content {
+    padding: 20px;
+    min-height: 750px;
+  }
+  .main_footer {
+    width: 100%;
+    color: @light_font_color;
+    position: fixed;
+    bottom: 0;
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    background-color: rgba(240,240,240,1);
   }
 }
