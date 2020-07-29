@@ -4,10 +4,6 @@ export const modules = [
     path: '/main/home',
   },
   {
-    name: 'echarts',
-    path: '/main/echarts',
-  },
-  {
     name: 'questions',
     path: '/main/questions',
   },
