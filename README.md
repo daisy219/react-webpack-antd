@@ -3,7 +3,7 @@
 此项目是项目搭建练习
 没什么具体功能，就是搭建了一个架子
 
-写过一篇从零搭建简单架子的教程(传送门)[http://www.sicilymarmot.top/#/yang_detail_babel_1]
+写过一篇从零搭建简单架子的教程[传送门](http://www.sicilymarmot.top/#/yang_detail_babel_1)
 
 偷懒~教程里没有涉及react和antd
 
